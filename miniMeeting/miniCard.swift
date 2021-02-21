@@ -11,6 +11,8 @@ struct miniCard: View {
     
     @ObservedObject var eventCellViewModel: EventCellViewModel
         
+//    @State var showingEdit = false
+    
     var body: some View {
                 
 
@@ -33,9 +35,17 @@ struct miniCard: View {
                         .clipShape(RoundedRectangle(cornerRadius:20))
                 )
                 
-            }.padding().frame(maxWidth:.infinity).background(eventCellViewModel.event.backgroundColor.opacity(0.3).clipShape(RoundedRectangle(cornerRadius:20))).padding()
+            }.padding().frame(maxWidth:.infinity)
+            .background(eventCellViewModel.event.backgroundColor.opacity(0.3).clipShape(RoundedRectangle(cornerRadius:20)))
+            
+            
+            .contentShape(RoundedRectangle(cornerRadius: 19, style: .continuous))
+            .padding()
         
     }
+    
+    
+    
 }
 
 struct miniCard_Previews: PreviewProvider {

@@ -15,6 +15,8 @@
 		1E61D74925DDECC90047B1C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E61D74825DDECC90047B1C8 /* Assets.xcassets */; };
 		1E61D74C25DDECC90047B1C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E61D74B25DDECC90047B1C8 /* Preview Assets.xcassets */; };
 		1E61D75525DDED570047B1C8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E61D75425DDED570047B1C8 /* Event.swift */; };
+		1E76C42B25E1976D00074FD4 /* miniColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E76C42A25E1976D00074FD4 /* miniColorPicker.swift */; };
+		1E76C42F25E1D9D500074FD4 /* miniSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E76C42E25E1D9D500074FD4 /* miniSettings.swift */; };
 		1E860FCF25DEAEC1007A3A67 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E860FCE25DEAEC1007A3A67 /* EventCellViewModel.swift */; };
 		1E860FD225DEC995007A3A67 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E860FD125DEC995007A3A67 /* EventListViewModel.swift */; };
 		1E860FD925DED05E007A3A67 /* miniEventFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E860FD825DED05E007A3A67 /* miniEventFormView.swift */; };
@@ -22,7 +24,36 @@
 		1EB486E925DEEB5F003EE2D3 /* codableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB486E825DEEB5F003EE2D3 /* codableColor.swift */; };
 		1EB486ED25DFDC5F003EE2D3 /* miniSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB486EC25DFDC5F003EE2D3 /* miniSectionHeader.swift */; };
 		1EB486F025DFEF21003EE2D3 /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB486EF25DFEF21003EE2D3 /* NumberTextField.swift */; };
+		1EB52C4425E01F100014DBCC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB52C4325E01F100014DBCC /* WidgetKit.framework */; };
+		1EB52C4625E01F100014DBCC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB52C4525E01F100014DBCC /* SwiftUI.framework */; };
+		1EB52C4925E01F100014DBCC /* miniMeetingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB52C4825E01F100014DBCC /* miniMeetingWidget.swift */; };
+		1EB52C4B25E01F130014DBCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EB52C4A25E01F130014DBCC /* Assets.xcassets */; };
+		1EB52C4F25E01F130014DBCC /* miniMeetingWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1EB52C4225E01F100014DBCC /* miniMeetingWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1EB52C4D25E01F130014DBCC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E61D73925DDECC80047B1C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EB52C4125E01F100014DBCC;
+			remoteInfo = miniMeetingWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1EB52C5025E01F130014DBCC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1EB52C4F25E01F130014DBCC /* miniMeetingWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1E1172E125DE887C00CC0DCB /* miniCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCard.swift; sourceTree = "<group>"; };
@@ -34,6 +65,8 @@
 		1E61D74B25DDECC90047B1C8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1E61D74D25DDECC90047B1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E61D75425DDED570047B1C8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		1E76C42A25E1976D00074FD4 /* miniColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniColorPicker.swift; sourceTree = "<group>"; };
+		1E76C42E25E1D9D500074FD4 /* miniSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniSettings.swift; sourceTree = "<group>"; };
 		1E860FCE25DEAEC1007A3A67 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		1E860FD125DEC995007A3A67 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
 		1E860FD825DED05E007A3A67 /* miniEventFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniEventFormView.swift; sourceTree = "<group>"; };
@@ -41,6 +74,13 @@
 		1EB486E825DEEB5F003EE2D3 /* codableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = codableColor.swift; sourceTree = "<group>"; };
 		1EB486EC25DFDC5F003EE2D3 /* miniSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniSectionHeader.swift; sourceTree = "<group>"; };
 		1EB486EF25DFEF21003EE2D3 /* NumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTextField.swift; sourceTree = "<group>"; };
+		1EB52C4225E01F100014DBCC /* miniMeetingWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = miniMeetingWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EB52C4325E01F100014DBCC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		1EB52C4525E01F100014DBCC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		1EB52C4825E01F100014DBCC /* miniMeetingWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniMeetingWidget.swift; sourceTree = "<group>"; };
+		1EB52C4A25E01F130014DBCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1EB52C4C25E01F130014DBCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EB52C5625E028770014DBCC /* miniMeetingGestures.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = miniMeetingGestures.playground; path = ../../miniMeetingGestures.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		52B1F8F7CDDED46335A0575E /* Pods-miniMeeting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniMeeting.release.xcconfig"; path = "Target Support Files/Pods-miniMeeting/Pods-miniMeeting.release.xcconfig"; sourceTree = "<group>"; };
 		E5F565560582C0B834C9B3BC /* Pods-miniMeeting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniMeeting.debug.xcconfig"; path = "Target Support Files/Pods-miniMeeting/Pods-miniMeeting.debug.xcconfig"; sourceTree = "<group>"; };
 		EF277A3147A6198906082625 /* Pods_miniMeeting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_miniMeeting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +95,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1EB52C3F25E01F100014DBCC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EB52C4625E01F100014DBCC /* SwiftUI.framework in Frameworks */,
+				1EB52C4425E01F100014DBCC /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -62,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				EF277A3147A6198906082625 /* Pods_miniMeeting.framework */,
+				1EB52C4325E01F100014DBCC /* WidgetKit.framework */,
+				1EB52C4525E01F100014DBCC /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -70,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				1E61D74325DDECC80047B1C8 /* miniMeeting */,
+				1EB52C4725E01F100014DBCC /* miniMeetingWidget */,
 				1E61D74225DDECC80047B1C8 /* Products */,
 				C51CE9B9522CAF7B8941E47D /* Pods */,
 				0D2FA08829DCF9B0B8B72C81 /* Frameworks */,
@@ -80,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				1E61D74125DDECC80047B1C8 /* miniMeeting.app */,
+				1EB52C4225E01F100014DBCC /* miniMeetingWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,6 +140,7 @@
 		1E61D74325DDECC80047B1C8 /* miniMeeting */ = {
 			isa = PBXGroup;
 			children = (
+				1EB52C5625E028770014DBCC /* miniMeetingGestures.playground */,
 				1EB486E725DEEB53003EE2D3 /* helpers */,
 				1EB486E325DEE73C003EE2D3 /* Repositories */,
 				1E61D74425DDECC80047B1C8 /* miniMeetingApp.swift */,
@@ -101,6 +155,8 @@
 				1E860FD825DED05E007A3A67 /* miniEventFormView.swift */,
 				1EB486EC25DFDC5F003EE2D3 /* miniSectionHeader.swift */,
 				1EB486EF25DFEF21003EE2D3 /* NumberTextField.swift */,
+				1E76C42A25E1976D00074FD4 /* miniColorPicker.swift */,
+				1E76C42E25E1D9D500074FD4 /* miniSettings.swift */,
 			);
 			path = miniMeeting;
 			sourceTree = "<group>";
@@ -146,6 +202,16 @@
 			path = helpers;
 			sourceTree = "<group>";
 		};
+		1EB52C4725E01F100014DBCC /* miniMeetingWidget */ = {
+			isa = PBXGroup;
+			children = (
+				1EB52C4825E01F100014DBCC /* miniMeetingWidget.swift */,
+				1EB52C4A25E01F130014DBCC /* Assets.xcassets */,
+				1EB52C4C25E01F130014DBCC /* Info.plist */,
+			);
+			path = miniMeetingWidget;
+			sourceTree = "<group>";
+		};
 		C51CE9B9522CAF7B8941E47D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,15 +233,34 @@
 				1E61D73E25DDECC80047B1C8 /* Frameworks */,
 				1E61D73F25DDECC80047B1C8 /* Resources */,
 				0B6756233465CD3B1C3C1A13 /* [CP] Embed Pods Frameworks */,
+				1EB52C5025E01F130014DBCC /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1EB52C4E25E01F130014DBCC /* PBXTargetDependency */,
 			);
 			name = miniMeeting;
 			productName = miniMeeting;
 			productReference = 1E61D74125DDECC80047B1C8 /* miniMeeting.app */;
 			productType = "com.apple.product-type.application";
+		};
+		1EB52C4125E01F100014DBCC /* miniMeetingWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1EB52C5325E01F130014DBCC /* Build configuration list for PBXNativeTarget "miniMeetingWidgetExtension" */;
+			buildPhases = (
+				1EB52C3E25E01F100014DBCC /* Sources */,
+				1EB52C3F25E01F100014DBCC /* Frameworks */,
+				1EB52C4025E01F100014DBCC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = miniMeetingWidgetExtension;
+			productName = miniMeetingWidgetExtension;
+			productReference = 1EB52C4225E01F100014DBCC /* miniMeetingWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -187,6 +272,9 @@
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					1E61D74025DDECC80047B1C8 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					1EB52C4125E01F100014DBCC = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -205,6 +293,7 @@
 			projectRoot = "";
 			targets = (
 				1E61D74025DDECC80047B1C8 /* miniMeeting */,
+				1EB52C4125E01F100014DBCC /* miniMeetingWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +306,14 @@
 				1E61D74C25DDECC90047B1C8 /* Preview Assets.xcassets in Resources */,
 				1E61D74925DDECC90047B1C8 /* Assets.xcassets in Resources */,
 				1E21BC0E25DE8E4A00170C9E /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EB52C4025E01F100014DBCC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EB52C4B25E01F130014DBCC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,15 +372,33 @@
 				1EB486E925DEEB5F003EE2D3 /* codableColor.swift in Sources */,
 				1EB486ED25DFDC5F003EE2D3 /* miniSectionHeader.swift in Sources */,
 				1EB486E525DEE755003EE2D3 /* EventRepository.swift in Sources */,
+				1E76C42B25E1976D00074FD4 /* miniColorPicker.swift in Sources */,
 				1E61D74725DDECC80047B1C8 /* ContentView.swift in Sources */,
 				1E860FD925DED05E007A3A67 /* miniEventFormView.swift in Sources */,
 				1E860FD225DEC995007A3A67 /* EventListViewModel.swift in Sources */,
 				1E61D74525DDECC80047B1C8 /* miniMeetingApp.swift in Sources */,
 				1E61D75525DDED570047B1C8 /* Event.swift in Sources */,
+				1E76C42F25E1D9D500074FD4 /* miniSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EB52C3E25E01F100014DBCC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EB52C4925E01F100014DBCC /* miniMeetingWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1EB52C4E25E01F130014DBCC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1EB52C4125E01F100014DBCC /* miniMeetingWidgetExtension */;
+			targetProxy = 1EB52C4D25E01F130014DBCC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1E61D74E25DDECC90047B1C8 /* Debug */ = {
@@ -406,6 +521,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E5F565560582C0B834C9B3BC /* Pods-miniMeeting.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -429,6 +545,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 52B1F8F7CDDED46335A0575E /* Pods-miniMeeting.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -443,6 +560,48 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = marrf.miniMeeting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1EB52C5125E01F130014DBCC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J85899W596;
+				INFOPLIST_FILE = miniMeetingWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = marrf.miniMeeting.miniMeetingWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1EB52C5225E01F130014DBCC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J85899W596;
+				INFOPLIST_FILE = miniMeetingWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = marrf.miniMeeting.miniMeetingWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -465,6 +624,15 @@
 			buildConfigurations = (
 				1E61D75125DDECC90047B1C8 /* Debug */,
 				1E61D75225DDECC90047B1C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1EB52C5325E01F130014DBCC /* Build configuration list for PBXNativeTarget "miniMeetingWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EB52C5125E01F130014DBCC /* Debug */,
+				1EB52C5225E01F130014DBCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
