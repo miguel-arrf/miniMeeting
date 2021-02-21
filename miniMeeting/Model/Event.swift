@@ -14,9 +14,15 @@ import FirebaseFirestoreSwift
 struct Event: Codable, Identifiable{
     @DocumentID var id : String?
     var name: String
-    var fromHour: Int
-    var toHour: Int
+    
+//    var fromHourOld: Int
+//    var toHourOld: Int
+    
     var category: String
+    
+    var date : Date
+    var fromHour : Date
+    var toHour : Date
     
     var backgroundColor: Color
     var textColor: Color
@@ -29,11 +35,11 @@ struct Event: Codable, Identifiable{
 
 #if DEBUG
 let testDataEvents = [
-    Event(name: "PISID - Teórica", fromHour: 10, toHour: 12, category: "Favorites", backgroundColor: UIColor(red: 252/255, green: 227/255, blue: 138/255, alpha: 1).toSwiftUIColor, textColor: UIColor(red: 218/255, green: 115/255, blue: 60/255, alpha: 1).toSwiftUIColor),
+    Event(name: "PISID - Teórica", category: "Favorites", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: UIColor(red: 252/255, green: 227/255, blue: 138/255, alpha: 1).toSwiftUIColor, textColor: UIColor(red: 218/255, green: 115/255, blue: 60/255, alpha: 1).toSwiftUIColor),
     
-    Event(name: "IPM - Prática", fromHour: 8, toHour: 9, category: "School", backgroundColor: UIColor(red: 174/255, green: 225/255, blue: 225/255, alpha: 1).toSwiftUIColor, textColor: UIColor(red: 129/255, green: 161/255, blue: 161/255, alpha: 1).toSwiftUIColor),
+    Event(name: "IPM - Prática", category: "School", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: UIColor(red: 174/255, green: 225/255, blue: 225/255, alpha: 1).toSwiftUIColor, textColor: UIColor(red: 129/255, green: 161/255, blue: 161/255, alpha: 1).toSwiftUIColor),
     
-    Event(name: "DECD", fromHour: 16, toHour: 20, category: "Others", backgroundColor: UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 0.6).toSwiftUIColor, textColor: UIColor(red: 129/255, green: 161/255, blue: 161/255, alpha: 1).toSwiftUIColor)
+    Event(name: "DECD", category: "Others", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 0.6).toSwiftUIColor, textColor: UIColor(red: 129/255, green: 161/255, blue: 161/255, alpha: 1).toSwiftUIColor)
 ]
 #endif
 

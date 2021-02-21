@@ -53,15 +53,19 @@ struct miniEventFormView: View {
                 }
                 
                 Section(header: Text("Hours ⏰")){
-                    HStack {
-                        Text("From Hour:")
-                        NumberTextField(value: $eventCellViewModel.event.fromHour)
-                    }
+//                    HStack {
+//                        Text("From Hour:")
+//                        NumberTextField(value: $eventCellViewModel.event.fromHourOld)
+//                    }
+//
+//                    HStack {
+//                        Text("To Hour:")
+//                        NumberTextField(value: $eventCellViewModel.event.toHourOld)
+//                    }
                     
-                    HStack {
-                        Text("To Hour:")
-                        NumberTextField(value: $eventCellViewModel.event.toHour)
-                    }
+                    DatePicker("Date", selection: $eventCellViewModel.event.date, displayedComponents: .date)
+                    DatePicker("Start Hour", selection: $eventCellViewModel.event.fromHour, displayedComponents: .hourAndMinute)
+                    DatePicker("End Hour", selection: $eventCellViewModel.event.toHour, displayedComponents: .hourAndMinute)
                 }
                 
                 Section(header: Text("Style 😎")) {
@@ -89,6 +93,6 @@ struct miniEventFormView: View {
 
 struct miniEventFormView_Previews: PreviewProvider {
     static var previews: some View {
-        miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", fromHour: 0, toHour: 0, category: "teste", backgroundColor: .blue, textColor: .black)), multipleCategories: ["C1","C2","C3"])
+        miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "teste", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: .blue, textColor: .black)), multipleCategories: ["C1","C2","C3"])
     }
 }

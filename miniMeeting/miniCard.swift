@@ -24,12 +24,14 @@ struct miniCard: View {
                 Spacer()
                 
                 HStack{
-                    Text("\(eventCellViewModel.event.fromHour)").fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
+                    
+                    
+                    Text(formatHour(eventCellViewModel.event.fromHour)).fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
                     
                     Image(systemName: "arrow.right")
                         .font(Font.system(.footnote).weight(.heavy)).foregroundColor(eventCellViewModel.event.textColor)
                     
-                    Text(String(eventCellViewModel.event.toHour)).fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
+                    Text(formatHour(eventCellViewModel.event.toHour)).fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
                 }.frame(minWidth:80).padding(3).padding([.leading,.trailing],10).background(
                     Color.white
                         .clipShape(RoundedRectangle(cornerRadius:20))
@@ -48,9 +50,21 @@ struct miniCard: View {
     
 }
 
+func formatHour(_ hour: Date) -> String {
+    /*
+     let formatter = DateFormatter()
+     formatter.timeStyle = .short
+     let dateString = formatter.string(from: Date())
+     */
+    let formatter = DateFormatter()
+    formatter.timeStyle = .short
+    
+    return formatter.string(from: hour)
+}
+
 struct miniCard_Previews: PreviewProvider {
     static var previews: some View {
-        miniCard(eventCellViewModel: EventCellViewModel(event: Event(name: "Teste", fromHour: 0, toHour: 0, category: "teste", backgroundColor: .blue, textColor: .black)))
+        miniCard(eventCellViewModel: EventCellViewModel(event: Event(name: "Teste", category: "teste", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: .blue, textColor: .black)))
     }
 }
 

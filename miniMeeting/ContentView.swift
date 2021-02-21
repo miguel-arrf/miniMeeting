@@ -16,7 +16,7 @@ enum ActiveSheet: Identifiable {
 }
 
 class ObjectToSend : ObservableObject{
-    @Published var selectedCell : EventCellViewModel = EventCellViewModel(event: Event(name: "", fromHour: 0, toHour: 0, category: "teste", backgroundColor: .blue, textColor: .black))
+    @Published var selectedCell : EventCellViewModel = EventCellViewModel(event: Event(name: "", category: "teste", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: .blue, textColor: .black))
     
     func changeCell(_ event: EventCellViewModel) {
         selectedCell = event
@@ -107,7 +107,7 @@ struct ContentView: View {
             
             switch item {
             case .first:
-                miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", fromHour: 0, toHour: 0, category: "", backgroundColor: Color.black.opacity(0.3), textColor: .black)), multipleCategories: multipleCategories) { event in
+                miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: Color.black.opacity(0.3), textColor: .black)), multipleCategories: multipleCategories) { event in
                     
                     self.eventListViewModel.addEvent(event: event)
                 }
@@ -116,18 +116,16 @@ struct ContentView: View {
                 let copy = EventCellViewModel(
                     event: Event(
                         name: selectedCell.selectedCell.event.name,
-                        fromHour: selectedCell.selectedCell.event.fromHour,
-                        toHour: selectedCell.selectedCell.event.toHour,
                         category: selectedCell.selectedCell.event.category,
-                        backgroundColor: selectedCell.selectedCell.event.backgroundColor,
+                        date : selectedCell.selectedCell.event.date,
+                        fromHour: selectedCell.selectedCell.event.fromHour,
+                        toHour: selectedCell.selectedCell.event.toHour, backgroundColor: selectedCell.selectedCell.event.backgroundColor,
                         textColor: selectedCell.selectedCell.event.textColor)
                 )
                 
                 miniEventFormView(eventCellViewModel: copy, jaExiste: true, multipleCategories: multipleCategories){event in
                     selectedCell.selectedCell.event.name = event.name
                     selectedCell.selectedCell.event.category = event.category
-                    selectedCell.selectedCell.event.fromHour = event.fromHour
-                    selectedCell.selectedCell.event.toHour = event.toHour
                     selectedCell.selectedCell.event.backgroundColor = event.backgroundColor
                     selectedCell.selectedCell.event.textColor = event.textColor
                 }
