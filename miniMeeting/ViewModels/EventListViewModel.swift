@@ -11,8 +11,11 @@ import SwiftUI
 
 class EventListViewModel: ObservableObject {
     @Published var eventCellViewModels = [EventCellViewModel]()
+    @Published var categoryViewModels = [CategoryViewModel]()
     
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellablesEvents = Set<AnyCancellable>()
+    private var cancellablesCategories = Set<AnyCancellable>()
+
     
     init() {
         
@@ -21,7 +24,14 @@ class EventListViewModel: ObservableObject {
                 EventCellViewModel(event: event)
             }
         }.assign(to: \.eventCellViewModels, on:self)
-        .store(in: &cancellables)
+        .store(in: &cancellablesEvents)
+        
+        CategoryRepository.shared.$categories.map{ categories in
+            categories.map{ category in
+                CategoryViewModel(category: category)
+            }
+        }.assign(to: \.categoryViewModels, on:self)
+        .store(in: &cancellablesCategories)
         
     }
     
@@ -30,6 +40,10 @@ class EventListViewModel: ObservableObject {
 //        let eventViewModel = EventCellViewModel(event: event)
 //        self.eventCellViewModels.append(eventViewModel)
         
+    }
+    
+    func addCategory(category: Category){
+        CategoryRepository.shared.addCategory(category)
     }
     
 

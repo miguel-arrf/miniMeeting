@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum ActiveSheet: Identifiable {
-    case first, second
+    case first, second, third
     
     var id: Int {
         hashValue
@@ -56,6 +56,16 @@ struct ContentView: View {
                         category = "No category"
                     }
                     return (eventCell.event.category, eventCell.event.backgroundColor, eventCell.event.textColor)
+                }
+                
+                Text("Eventos:")
+                ForEach(eventListViewModel.eventCellViewModels){event in
+                    Text("\(event.event.name)")
+                    
+                }
+                Text("Categorias:")
+                ForEach(eventListViewModel.categoryViewModels){category in
+                    Text("\(category.category.name)")
                 }
                 
                 ForEach(removeDuplicates(multipleCategories), id: \.0){category in
@@ -107,6 +117,10 @@ struct ContentView: View {
 
                 }
                 
+            case .third:
+                miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "New Category", backgroundColor: .orange, textColor: .blue))){ category in
+                    self.eventListViewModel.addCategory(category: category)
+                }
             }
         }
         
@@ -119,15 +133,19 @@ struct ContentView: View {
                                             .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
                                     }
                                     
-                                    
-                                    Button(action: {
-                                        activeSheet = .first
-                                    }) {
-                                        Image(systemName: "plus")
-                                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
-                                    }.foregroundColor(.black)
-                                    
                                 
+                                    Menu {
+                                        Button("Add Event", action: {
+                                            activeSheet = .first
+                                        })
+                                        Button("Add Section", action: {
+                                            activeSheet = .third
+                                        })
+                                            } label: {
+                                                Image(systemName: "plus.circle")
+                                                    .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
+                                            }
+                                    
                                     Menu {
                                                 Button("Order by number", action: placeOrder)
                                                 Button("Order by + recent", action: adjustOrder)
@@ -193,5 +211,6 @@ struct ContentView_Previews: PreviewProvider {
             ContentView()
         }
         .preferredColorScheme(.light)
+        
     }
 }
