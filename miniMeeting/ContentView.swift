@@ -51,6 +51,10 @@ struct ContentView: View {
             ScrollView{
                 Rectangle().frame(width: 10, height: 10).foregroundColor(.clear)
                 let multipleCategories = eventListViewModel.eventCellViewModels.map{ (eventCell) -> (String, Color, Color) in
+                    var category = eventCell.event.category
+                    if category.isEmpty{
+                        category = "No category"
+                    }
                     return (eventCell.event.category, eventCell.event.backgroundColor, eventCell.event.textColor)
                 }
                 
@@ -58,51 +62,20 @@ struct ContentView: View {
                     
                     miniSectionHeader(event: category, count: getCount(category.0, eventListViewModel), category: category, eventListViewModel: eventListViewModel,activeSheet: $activeSheet, selectedCell: selectedCell)
                     
-//                    if(!testecoiso){
-//
-////                        ForEach(eventListViewModel.eventCellViewModels.filter {$0.event.category == category.0 }){eventCellViewModel in
-////
-////                            miniCard(eventCellViewModel: eventCellViewModel)
-////                                .contextMenu(ContextMenu(menuItems: {
-////                                    Button(action: {
-////                                        selectedCell.changeCell(eventCellViewModel)
-////                                        activeSheet = .second
-////                                    }, label: {
-////                                        Label("Edit", systemImage: "slider.horizontal.3")
-////                                    })
-////
-////                                    Button(action: {
-////
-////                                        EventRepository.shared.db.collection("events").document(eventCellViewModel.event.id!).delete() { err in
-////
-////                                            if let err = err {
-////                                                print("Error removing document: \(err)")
-////                                            } else {
-////                                                print("Document successfully removed!")
-////                                            }
-////
-////                                        }
-////
-////                                    }, label: {
-////                                        Label("Delete", systemImage: "trash")
-////                                    })
-////                                }))
-////                                .transition(.asymmetric(insertion: .scale, removal: .opacity))
-////                        }
-//
-//                    }
-                    
                 }
                 
             }
-//            .padding([.top])
             
         }
         
         .sheet(item: $activeSheet) { item in
             
             let multipleCategories = eventListViewModel.eventCellViewModels.map{ (eventCell) -> String in
-                return eventCell.event.category
+                if eventCell.event.category.isEmpty {
+                    return "No category"
+                }else{
+                    return eventCell.event.category
+                }
             }
             
             switch item {
@@ -128,6 +101,10 @@ struct ContentView: View {
                     selectedCell.selectedCell.event.category = event.category
                     selectedCell.selectedCell.event.backgroundColor = event.backgroundColor
                     selectedCell.selectedCell.event.textColor = event.textColor
+                    selectedCell.selectedCell.event.date = event.date
+                    selectedCell.selectedCell.event.fromHour = event.fromHour
+                    selectedCell.selectedCell.event.toHour = event.toHour
+
                 }
                 
             }
@@ -143,15 +120,6 @@ struct ContentView: View {
                                     }
                                     
                                     
-//                                    Button(action: {
-//                                        activeSheet = .first
-//                                    }) {
-//
-//                                        Image(systemName: "gearshape")
-//                                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
-//
-//                                    }.foregroundColor(.black)
-                                    
                                     Button(action: {
                                         activeSheet = .first
                                     }) {
@@ -159,11 +127,24 @@ struct ContentView: View {
                                             .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
                                     }.foregroundColor(.black)
                                     
+                                
+                                    Menu {
+                                                Button("Order by number", action: placeOrder)
+                                                Button("Order by + recent", action: adjustOrder)
+                                        Button("Order by - recent", action: placeOrder)
+                                            } label: {
+                                                Image(systemName: "ellipsis.circle")
+                                                    .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
+                                            }
+                                    
                                 })
         
         .navigationTitle("17 Fevereiro 2021")
     }
 }
+
+func placeOrder() { }
+    func adjustOrder() { }
 
 func getCount(_ category : String, _ eventListViewModel : EventListViewModel) -> Int {
     

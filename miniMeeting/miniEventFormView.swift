@@ -68,6 +68,12 @@ struct miniEventFormView: View {
                     DatePicker("End Hour", selection: $eventCellViewModel.event.toHour, displayedComponents: .hourAndMinute)
                 }
                 
+                Section(header: Text("Link 💻")){
+                    TextField("Website", text: $eventCellViewModel.event.category)
+                        .textContentType(.URL)
+                        .keyboardType(.URL)
+                }
+                
                 Section(header: Text("Style 😎")) {
 //                    TextField("From Hour", value: $eventCellViewModel.event.fromHour, formatter: NumberFormatter())
 //                    TextField("To Hour", value: $eventCellViewModel.event.toHour, formatter: NumberFormatter())

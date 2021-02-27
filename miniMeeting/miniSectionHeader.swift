@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct miniSectionHeader: View {
     
@@ -33,7 +34,7 @@ struct miniSectionHeader: View {
                             event.1.opacity(0.3)
                         )
                     }
-                }.opacity(openedSection ? 0.5 : 1)
+                }.opacity(openedSection ? 1 : 0.5)
                 .animation(.easeInOut)
                 
                 
@@ -47,7 +48,7 @@ struct miniSectionHeader: View {
                     }
                     .rotationEffect(Angle.degrees(openedSection ? 0 : 180))
                     .animation(.easeInOut)
-                    .opacity(openedSection ? 0.5 : 1)
+                    .opacity(openedSection ? 1 : 0.5)
             }.padding([.leading, .trailing])
             
             
@@ -58,8 +59,7 @@ struct miniSectionHeader: View {
                         .contextMenu(ContextMenu(menuItems: {
                             
                             Button(action: {
-                                selectedCell.changeCell(eventCellViewModel)
-                                activeSheet = .second
+                                yupiNotification(for: eventCellViewModel.event)
                             }, label: {
                                 Label("Turn On notification", systemImage: "bell")
                             })
@@ -96,6 +96,69 @@ struct miniSectionHeader: View {
             
         }
     }
+}
+
+func yupiNotification(for event: Event) {
+    addNotification(for: event)
+}
+
+func getNotification(for event: Event, for center: UNUserNotificationCenter, for number: NSNumber){
+    
+        let content = UNMutableNotificationContent()
+        content.title = "\(event.name)"
+        content.subtitle = "\(event.category)"
+        content.badge = number
+        
+        content.sound = UNNotificationSound.default
+        
+        
+        let calendar = Calendar.current
+        
+        var dateComponents = DateComponents()
+        dateComponents.minute = calendar.component(.minute, from: event.fromHour)
+        dateComponents.hour = calendar.component(.hour, from: event.fromHour)
+        dateComponents.day = calendar.component(.day, from: event.date)
+        dateComponents.month = calendar.component(.month, from: event.date)
+        dateComponents.year = calendar.component(.year, from: event.date)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        center.add(request)
+    
+    
+}
+
+func addNotification(for event: Event, number: NSNumber? = 0){
+    let center = UNUserNotificationCenter.current()
+    
+    
+    
+    center.getNotificationSettings{ settings in
+        if settings.authorizationStatus == .authorized{
+
+            let badgeCount = UserDefaults.standard.value(forKey: "NotificationBadgeCount") as! Int + 1
+            UserDefaults.standard.setValue(badgeCount, forKey: "NotificationBadgeCount")
+            getNotification(for: event, for: center, for: badgeCount as NSNumber)
+
+            
+        } else {
+            center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success{
+                    let badgeCount = UserDefaults.standard.value(forKey: "NotificationBadgeCount") as! Int + 1
+                    UserDefaults.standard.setValue(badgeCount, forKey: "NotificationBadgeCount")
+                    getNotification(for: event, for: center, for: badgeCount as NSNumber)
+//                    UIApplication.shared.applicationIconBadgeNumber = 2
+                }else {
+                    print("D'oh")
+                }
+                
+            }
+        }
+    }
+    
+    
 }
 
 #if DEBUG

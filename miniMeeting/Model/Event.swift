@@ -15,9 +15,6 @@ struct Event: Codable, Identifiable{
     @DocumentID var id : String?
     var name: String
     
-//    var fromHourOld: Int
-//    var toHourOld: Int
-    
     var category: String
     
     var date : Date
@@ -26,6 +23,8 @@ struct Event: Codable, Identifiable{
     
     var backgroundColor: Color
     var textColor: Color
+    
+    var link:URL?
     
     var userId : String?
     @ServerTimestamp var createdTime: Timestamp?

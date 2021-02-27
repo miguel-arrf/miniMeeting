@@ -23,6 +23,8 @@ struct miniCard: View {
                 
                 Spacer()
                 
+                
+                
                 HStack{
                     
                     

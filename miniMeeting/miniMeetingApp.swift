@@ -14,13 +14,24 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     print("App Delegate.")
     
+    UIApplication.shared.applicationIconBadgeNumber = 0
+    UserDefaults.standard.set(0, forKey: "NotificationBadgeCount")
+
     return true
   }
+    
+//    func applicationDidBecomeActive(_ application: UIApplication) {
+//        UIApplication.shared.applicationIconBadgeNumber = 0
+//        UserDefaults.standard.set(0, forKey: "NotificationBadgeCount")
+//    }
+    
+    
 }
 
 @main
 struct miniMeetingApp: App {
     
+    @Environment(\.scenePhase) var scenePhase
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
       
       init() {
@@ -31,8 +42,25 @@ struct miniMeetingApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView{
+//                miniEventDetailView(event: Event( name: "PISID - Teórica", category: "Favorites", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: UIColor(red: 252/255, green: 227/255, blue: 138/255, alpha: 1).toSwiftUIColor, textColor: UIColor(red: 218/255, green: 115/255, blue: 60/255, alpha: 1).toSwiftUIColor, link: URL(string: "https://www.google.pt")))
                 ContentView()
             }
+        }
+        .onChange(of: scenePhase){ newScenePhase in
+            switch newScenePhase{
+            case .active:
+                    print("---- App is active")
+                    UIApplication.shared.applicationIconBadgeNumber = 0
+                    UserDefaults.standard.set(0, forKey: "NotificationBadgeCount")
+
+                  case .inactive:
+                    print("---- App is inactive")
+                  case .background:
+                    print("---- App is in background")
+                  @unknown default:
+                    print("---- Oh - interesting: I received an unexpected new value.")
+            }
+            
         }
     }
 }
