@@ -39,17 +39,18 @@ struct miniEventFormView: View {
                 }
                 
                 Section(header: Text("Category 📦")){
-                    TextField("Category", text: $eventCellViewModel.event.category)
-                    
+                    Toggle("Use category", isOn: $eventCellViewModel.event.hasCategory)
+
                     HStack {
                         Text("Created categories:")
                         Spacer()
-                        Picker("Strength", selection: $selectedStrength) {
+                        
+                        Picker("Category", selection: $eventCellViewModel.event.category) {
                                                 ForEach(multipleCategories, id: \.self) {
                                                     Text($0)
                                                 }
                         }.pickerStyle(MenuPickerStyle())
-                    }
+                    }.disabled(eventCellViewModel.event.hasCategory ? false : true)
                 }
                 
                 Section(header: Text("Hours ⏰")){

@@ -34,6 +34,7 @@
 		1EB52C4925E01F100014DBCC /* miniMeetingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB52C4825E01F100014DBCC /* miniMeetingWidget.swift */; };
 		1EB52C4B25E01F130014DBCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EB52C4A25E01F130014DBCC /* Assets.xcassets */; };
 		1EB52C4F25E01F130014DBCC /* miniMeetingWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1EB52C4225E01F100014DBCC /* miniMeetingWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1ED5441825ED03CF00843218 /* miniCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED5441725ED03CF00843218 /* miniCategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		1EB52C4A25E01F130014DBCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EB52C4C25E01F130014DBCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EB52C5625E028770014DBCC /* miniMeetingGestures.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = miniMeetingGestures.playground; path = ../../miniMeetingGestures.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1ED5441725ED03CF00843218 /* miniCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCategoryView.swift; sourceTree = "<group>"; };
 		52B1F8F7CDDED46335A0575E /* Pods-miniMeeting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniMeeting.release.xcconfig"; path = "Target Support Files/Pods-miniMeeting/Pods-miniMeeting.release.xcconfig"; sourceTree = "<group>"; };
 		E5F565560582C0B834C9B3BC /* Pods-miniMeeting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniMeeting.debug.xcconfig"; path = "Target Support Files/Pods-miniMeeting/Pods-miniMeeting.debug.xcconfig"; sourceTree = "<group>"; };
 		EF277A3147A6198906082625 /* Pods_miniMeeting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_miniMeeting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +171,7 @@
 				1E76C42E25E1D9D500074FD4 /* miniSettings.swift */,
 				1E44258B25E9C8C700102B88 /* miniEventDetailView.swift */,
 				1EA1C9A325EA5CB900C2C0F2 /* miniCategoryFormView.swift */,
+				1ED5441725ED03CF00843218 /* miniCategoryView.swift */,
 			);
 			path = miniMeeting;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E860FCF25DEAEC1007A3A67 /* EventCellViewModel.swift in Sources */,
+				1ED5441825ED03CF00843218 /* miniCategoryView.swift in Sources */,
 				1EA1C99C25EA59BD00C2C0F2 /* CategoryRepository.swift in Sources */,
 				1E1172E225DE887C00CC0DCB /* miniCard.swift in Sources */,
 				1EB486F025DFEF21003EE2D3 /* NumberTextField.swift in Sources */,

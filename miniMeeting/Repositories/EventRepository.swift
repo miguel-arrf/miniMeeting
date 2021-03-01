@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Firebase
+import SwiftUI
 
 
 class EventRepository: ObservableObject {
@@ -31,11 +32,11 @@ class EventRepository: ObservableObject {
             .addSnapshotListener { (querySnapshot, error) in
 
             if let querySnapshot = querySnapshot {
-
+                withAnimation{
                 self.events = querySnapshot.documents.compactMap{ document in
 
                     do{
-
+                        
                         let x = try document.data(as: Event.self)
 
                         return x
@@ -44,6 +45,7 @@ class EventRepository: ObservableObject {
                         print(error)
                     }
                     return nil
+                }
                 }
                 
             }

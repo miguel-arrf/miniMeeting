@@ -19,6 +19,13 @@ class EventListViewModel: ObservableObject {
     
     init() {
         
+        CategoryRepository.shared.$categories.map{ categories in
+            categories.map{ category in
+                CategoryViewModel(category: category)
+            }
+        }.assign(to: \.categoryViewModels, on:self)
+        .store(in: &cancellablesCategories)
+        
         EventRepository.shared.$events.map{ events in
             events.map{ event in
                 EventCellViewModel(event: event)
@@ -26,12 +33,8 @@ class EventListViewModel: ObservableObject {
         }.assign(to: \.eventCellViewModels, on:self)
         .store(in: &cancellablesEvents)
         
-        CategoryRepository.shared.$categories.map{ categories in
-            categories.map{ category in
-                CategoryViewModel(category: category)
-            }
-        }.assign(to: \.categoryViewModels, on:self)
-        .store(in: &cancellablesCategories)
+        
+       
         
     }
     

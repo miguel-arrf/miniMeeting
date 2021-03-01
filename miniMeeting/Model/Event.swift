@@ -16,6 +16,7 @@ struct Event: Codable, Identifiable{
     var name: String
     
     var category: String
+    var hasCategory : Bool = true
     
     var date : Date
     var fromHour : Date

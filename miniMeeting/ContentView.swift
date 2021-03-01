@@ -27,13 +27,18 @@ class OpenedSections: ObservableObject {
     @Published var openedSection : [Bool] = [Bool]()
 }
 
+
+
 struct ContentView: View {
     
     @State var presentANewItem = false
     @State var showingEdit = false
     @State var activeSheet: ActiveSheet?
+        
+    @State var showSections: Bool = true
     
     @ObservedObject var eventListViewModel = EventListViewModel()
+    
     @ObservedObject var selectedCell = ObjectToSend()
     
     @State var testecoiso = false
@@ -50,6 +55,7 @@ struct ContentView: View {
             
             ScrollView{
                 Rectangle().frame(width: 10, height: 10).foregroundColor(.clear)
+                
                 let multipleCategories = eventListViewModel.eventCellViewModels.map{ (eventCell) -> (String, Color, Color) in
                     var category = eventCell.event.category
                     if category.isEmpty{
@@ -57,35 +63,68 @@ struct ContentView: View {
                     }
                     return (eventCell.event.category, eventCell.event.backgroundColor, eventCell.event.textColor)
                 }
+                    
+                if showSections{
+                    ForEach(eventListViewModel.categoryViewModels){category in
+                        let tupleCategory : (String, Color, Color) = (category.category.name, category.category.textColor, category.category.textColor)
+                        
+                        let offset = { () -> CGFloat in
+                            if eventListViewModel.categoryViewModels.count == 1 {
+                                return CGFloat(0)
+                            }else{
+                                return CGFloat(10)
+                            }
+                        }
+                    
+                        miniSectionHeader(event: tupleCategory, count: getCount(tupleCategory.0, eventListViewModel), editing: $showingEdit, category: tupleCategory, eventListViewModel: eventListViewModel, activeSheet: $activeSheet, selectedCell: selectedCell)
+                            .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/).foregroundColor(tupleCategory.2).opacity(0.05).transition(.asymmetric(insertion: .scale, removal: .scale)).padding().offset(y:17)).padding(.bottom, offset())
+                        
+                    }
+                    
+                    ForEach(eventListViewModel.eventCellViewModels){ event in
+                        if event.event.hasCategory == false {
+                            withAnimation{
+                                miniCard(eventCellViewModel: event).transition(.move(edge: .leading))
+                            }
+                        }
+                        
+                    }
+
+//                    ForEach(removeDuplicates(multipleCategories), id: \.0){category in
+//
+//                        miniSectionHeader(event: category, count: getCount(category.0, eventListViewModel), category: category, eventListViewModel: eventListViewModel,activeSheet: $activeSheet, selectedCell: selectedCell)
+//                    }
+                    
+                }else{
+                    
+                    ForEach(eventListViewModel.eventCellViewModels){ eventCellViewModel in
+                        miniCard(eventCellViewModel: eventCellViewModel)
+                    }
+                    
+                }
+               
                 
-                Text("Eventos:")
-                ForEach(eventListViewModel.eventCellViewModels){event in
-                    Text("\(event.event.name)")
-                    
-                }
-                Text("Categorias:")
-                ForEach(eventListViewModel.categoryViewModels){category in
-                    Text("\(category.category.name)")
-                }
-                
-                ForEach(removeDuplicates(multipleCategories), id: \.0){category in
-                    
-                    miniSectionHeader(event: category, count: getCount(category.0, eventListViewModel), category: category, eventListViewModel: eventListViewModel,activeSheet: $activeSheet, selectedCell: selectedCell)
-                    
-                }
                 
             }
-            
         }
         
         .sheet(item: $activeSheet) { item in
             
-            let multipleCategories = eventListViewModel.eventCellViewModels.map{ (eventCell) -> String in
+            let multipleCategoriesNew = eventListViewModel.eventCellViewModels.map{ (eventCell) -> String in
                 if eventCell.event.category.isEmpty {
-                    return "No category"
+                    return "Default category"
                 }else{
                     return eventCell.event.category
                 }
+            }
+            
+            let multipleCategories = eventListViewModel.categoryViewModels.map{ categoryCell -> String in
+                if categoryCell.category.name.isEmpty{
+                    return "Default category"
+                }else{
+                    return categoryCell.category.name
+                }
+                
             }
             
             switch item {
@@ -125,7 +164,8 @@ struct ContentView: View {
         }
         
         
-        .navigationBarItems( trailing:
+        .navigationBarItems(
+            trailing:
                                 HStack {
                                     
                                     NavigationLink(destination: miniSettings()) {
@@ -147,6 +187,15 @@ struct ContentView: View {
                                             }
                                     
                                     Menu {
+                                        
+                                        Section{
+                                            Button("Edit Sections", action: showEdit)
+                                        }
+                                        
+                                        Section{
+                                            Button("Disable sections", action: disableSections)
+                                        }
+                                        
                                                 Button("Order by number", action: placeOrder)
                                                 Button("Order by + recent", action: adjustOrder)
                                         Button("Order by - recent", action: placeOrder)
@@ -155,11 +204,28 @@ struct ContentView: View {
                                                     .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
                                             }
                                     
+                                   
+                                    
+                                    
                                 })
         
         .navigationTitle("17 Fevereiro 2021")
     }
+    
+    func showEdit(){
+        withAnimation{
+            showingEdit.toggle()
+        }
+    }
+    
+    func disableSections() {
+        withAnimation{
+            showSections.toggle()
+        }
+    }
 }
+
+
 
 func placeOrder() { }
     func adjustOrder() { }
@@ -210,7 +276,7 @@ struct ContentView_Previews: PreviewProvider {
         NavigationView{
             ContentView()
         }
-        .preferredColorScheme(.light)
+        
         
     }
 }

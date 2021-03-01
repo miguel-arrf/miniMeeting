@@ -43,7 +43,8 @@ struct miniMeetingApp: App {
         WindowGroup {
             NavigationView{
 //                miniEventDetailView(event: Event( name: "PISID - Teórica", category: "Favorites", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: UIColor(red: 252/255, green: 227/255, blue: 138/255, alpha: 1).toSwiftUIColor, textColor: UIColor(red: 218/255, green: 115/255, blue: 60/255, alpha: 1).toSwiftUIColor, link: URL(string: "https://www.google.pt")))
-                ContentView()
+//                ContentView()
+                miniCategoryView()
             }
         }
         .onChange(of: scenePhase){ newScenePhase in

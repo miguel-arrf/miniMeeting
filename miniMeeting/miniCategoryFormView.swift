@@ -15,9 +15,9 @@ struct miniCategoryFormView: View {
     
     
     var body: some View {
-        NavigationView{
+      
             Form{
-                Section(header: Text("Hours ⏰")){
+                Section(header: Text("Hours ⏰").padding(.top)){
                     TextField("Name", text: $categoryViewModel.category.name)
                 }
                 
@@ -34,14 +34,17 @@ struct miniCategoryFormView: View {
                     }
                 }
             }.listStyle(GroupedListStyle()).navigationTitle(categoryViewModel.category.name)
-        }
+            .navigationBarTitleDisplayMode(.inline)
+
+        
     }
 }
 
 struct miniCategoryFormView_Previews: PreviewProvider {
     static var previews: some View {
-        miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "Escola", backgroundColor: .orange, textColor: .blue)))
-        
-        
+        NavigationView{
+            miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "Escola", backgroundColor: .orange, textColor: .blue)))
+        }
+
     }
 }

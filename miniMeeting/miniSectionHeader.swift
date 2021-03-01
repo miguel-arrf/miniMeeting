@@ -15,10 +15,17 @@ struct miniSectionHeader: View {
     
     @State var openedSection : Bool = true
     
+    @Binding var editing : Bool
+    @State var selected: Bool = false
+    
     var category : (String, Color, Color)
     @ObservedObject var eventListViewModel: EventListViewModel
     @Binding var activeSheet: ActiveSheet?
     @ObservedObject var selectedCell : ObjectToSend
+    
+    func turnOff(){
+        openedSection = false
+    }
     
     var body: some View {
         VStack{
@@ -34,21 +41,50 @@ struct miniSectionHeader: View {
                             event.1.opacity(0.3)
                         )
                     }
+                    
+                    if count == 0{
+                        Text("Empty").fontWeight(.bold).foregroundColor(.gray)
+                    }
                 }.opacity(openedSection ? 1 : 0.5)
                 .animation(.easeInOut)
                 
                 
                 Spacer()
-                Image(systemName: "chevron.up")
-                    .font(Font.system(.body).weight(.semibold)).foregroundColor(event.2)
-                    .onTapGesture {
-                        withAnimation{
-                            openedSection.toggle()
+                
+                if count != 0{
+                    Image(systemName: "chevron.up")
+                        .font(Font.system(.body).weight(.semibold)).foregroundColor(event.2)
+                        .onTapGesture {
+                            withAnimation{
+                                openedSection.toggle()
+                            }
+                        }
+                        .rotationEffect(Angle.degrees(openedSection ? 0 : 180))
+                        .animation(.easeInOut)
+                        .opacity(openedSection ? 1 : 0.5)
+                    
+                }
+                
+                if editing{
+                    ZStack{
+                        Circle().foregroundColor(.red).opacity(0.2).offset(x: editing ? 0 : 50).frame(width: 20, height: 20)
+                            .onTapGesture {
+                                withAnimation{
+                                        selected.toggle()
+                                }
+                            }
+                           
+                        Image(systemName: "checkmark.circle").opacity(selected ? 1 : 0).foregroundColor(.red)
+                            .onTapGesture {
+                                withAnimation{
+                                    selected.toggle()
+                                }
                         }
                     }
-                    .rotationEffect(Angle.degrees(openedSection ? 0 : 180))
-                    .animation(.easeInOut)
-                    .opacity(openedSection ? 1 : 0.5)
+                    
+                }
+                
+
             }.padding([.leading, .trailing])
             
             
@@ -86,15 +122,15 @@ struct miniSectionHeader: View {
                             }, label: {
                                 Label("Delete", systemImage: "trash")
                             })
-                        }))
+                        })).padding([.leading, .trailing])
                         //                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
-                        .transition(.asymmetric(insertion: .scale, removal: .scale))
+                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
                 }
             }
-            
-            
-            
+    
         }
+//        .overlay(RoundedRectangle(cornerRadius: 20).foregroundColor(category.2).opacity(0.05).padding().offset(y: 15).transition(.asymmetric(insertion: .scale, removal: .slide)))
+   
     }
 }
 
@@ -167,7 +203,7 @@ struct miniSectionHeader_Previews : PreviewProvider {
     @State static var activeSheet : ActiveSheet? = ActiveSheet.first
     
     static var previews: some View {
-        miniSectionHeader(event: (testDataEvents[0].name,testDataEvents[0].backgroundColor, testDataEvents[0].textColor ), category: ("Teste",.black, .white),eventListViewModel: EventListViewModel(), activeSheet: $activeSheet, selectedCell: ObjectToSend())
+        miniSectionHeader(event: (testDataEvents[0].name,testDataEvents[0].backgroundColor, testDataEvents[0].textColor ), editing: .constant(false), category: ("Teste",.black, .white),eventListViewModel: EventListViewModel(), activeSheet: $activeSheet, selectedCell: ObjectToSend())
     }
     
 }
