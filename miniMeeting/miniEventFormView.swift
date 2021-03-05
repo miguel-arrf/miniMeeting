@@ -10,7 +10,7 @@ import SwiftUI
 struct miniEventFormView: View {
     
     @ObservedObject var eventCellViewModel: EventCellViewModel
-
+    
     var jaExiste : Bool = false
     var multipleCategories : [String]
     var onCommit: (Event) -> (Void) = {_ in}
@@ -18,7 +18,7 @@ struct miniEventFormView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var selectedStrength = "Mild"
-       
+    
     var body: some View {
         
         NavigationView{
@@ -33,36 +33,59 @@ struct miniEventFormView: View {
                     
                     miniCard(eventCellViewModel: eventCellViewModel)
                 }
-
+                
                 Section(header: Text("Name 🏷")){
                     TextField("Name", text: $eventCellViewModel.event.name)
                 }
                 
                 Section(header: Text("Category 📦")){
+                    
+                    
+                    HStack(){
+                        Group{
+                            Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[0].toSwiftUIColor)
+                            Spacer()
+                            
+                            Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[1].toSwiftUIColor)
+                            Spacer()
+                            
+                            Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[2].toSwiftUIColor)
+                            Spacer()
+                        }
+                        Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[3].toSwiftUIColor)
+                        Spacer()
+                        
+                        Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[4].toSwiftUIColor)
+                        Spacer()
+                        
+                        Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[5].toSwiftUIColor)
+                    }
+                    
+                    
                     Toggle("Use category", isOn: $eventCellViewModel.event.hasCategory)
-
+                    
                     HStack {
                         Text("Created categories:")
                         Spacer()
                         
                         Picker("Category", selection: $eventCellViewModel.event.category) {
-                                                ForEach(multipleCategories, id: \.self) {
-                                                    Text($0)
-                                                }
+                            ForEach(multipleCategories, id: \.self) {
+                                Text($0)
+                            }
                         }.pickerStyle(MenuPickerStyle())
                     }.disabled(eventCellViewModel.event.hasCategory ? false : true)
                 }
                 
                 Section(header: Text("Hours ⏰")){
-//                    HStack {
-//                        Text("From Hour:")
-//                        NumberTextField(value: $eventCellViewModel.event.fromHourOld)
-//                    }
-//
-//                    HStack {
-//                        Text("To Hour:")
-//                        NumberTextField(value: $eventCellViewModel.event.toHourOld)
-//                    }
+                    //                    HStack {
+                    //                        Text("From Hour:")
+                    //                        NumberTextField(value: $eventCellViewModel.event.fromHourOld)
+                    //                    }
+                    //
+                    //                    HStack {
+                    //                        Text("To Hour:")
+                    //                        NumberTextField(value: $eventCellViewModel.event.toHourOld)
+                    //                    }
                     
                     DatePicker("Date", selection: $eventCellViewModel.event.date, displayedComponents: .date)
                     DatePicker("Start Hour", selection: $eventCellViewModel.event.fromHour, displayedComponents: .hourAndMinute)
@@ -76,8 +99,8 @@ struct miniEventFormView: View {
                 }
                 
                 Section(header: Text("Style 😎")) {
-//                    TextField("From Hour", value: $eventCellViewModel.event.fromHour, formatter: NumberFormatter())
-//                    TextField("To Hour", value: $eventCellViewModel.event.toHour, formatter: NumberFormatter())
+                    //                    TextField("From Hour", value: $eventCellViewModel.event.fromHour, formatter: NumberFormatter())
+                    //                    TextField("To Hour", value: $eventCellViewModel.event.toHour, formatter: NumberFormatter())
                     
                     //                DatePicker("From Hour", selection: $fromHour, displayedComponents: .hourAndMinute)
                     //

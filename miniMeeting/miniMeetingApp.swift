@@ -43,8 +43,8 @@ struct miniMeetingApp: App {
         WindowGroup {
             NavigationView{
 //                miniEventDetailView(event: Event( name: "PISID - Teórica", category: "Favorites", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: UIColor(red: 252/255, green: 227/255, blue: 138/255, alpha: 1).toSwiftUIColor, textColor: UIColor(red: 218/255, green: 115/255, blue: 60/255, alpha: 1).toSwiftUIColor, link: URL(string: "https://www.google.pt")))
-//                ContentView()
-                miniCategoryView()
+                ContentView()
+//                miniCategoryView()
             }
         }
         .onChange(of: scenePhase){ newScenePhase in
@@ -65,3 +65,6 @@ struct miniMeetingApp: App {
         }
     }
 }
+
+
+var fixedColors : [UIColor] = [#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)]

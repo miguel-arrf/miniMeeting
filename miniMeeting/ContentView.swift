@@ -27,18 +27,16 @@ class OpenedSections: ObservableObject {
     @Published var openedSection : [Bool] = [Bool]()
 }
 
-
-
 struct ContentView: View {
     
     @State var presentANewItem = false
     @State var showingEdit = false
-    @State var activeSheet: ActiveSheet?
-        
+    
     @State var showSections: Bool = true
     
     @ObservedObject var eventListViewModel = EventListViewModel()
     
+    @State var activeSheet: ActiveSheet?
     @ObservedObject var selectedCell = ObjectToSend()
     
     @State var testecoiso = false
@@ -54,7 +52,6 @@ struct ContentView: View {
         ZStack(alignment:.bottomTrailing){
             
             ScrollView{
-                Rectangle().frame(width: 10, height: 10).foregroundColor(.clear)
                 
                 let multipleCategories = eventListViewModel.eventCellViewModels.map{ (eventCell) -> (String, Color, Color) in
                     var category = eventCell.event.category
@@ -63,8 +60,12 @@ struct ContentView: View {
                     }
                     return (eventCell.event.category, eventCell.event.backgroundColor, eventCell.event.textColor)
                 }
-                    
+                
                 if showSections{
+                    
+                    ExtractedView(eventListViewModel: eventListViewModel, activeSheet: $activeSheet, selectedCell: selectedCell)
+                        
+                    
                     ForEach(eventListViewModel.categoryViewModels){category in
                         let tupleCategory : (String, Color, Color) = (category.category.name, category.category.textColor, category.category.textColor)
                         
@@ -75,25 +76,16 @@ struct ContentView: View {
                                 return CGFloat(10)
                             }
                         }
-                    
+                        
                         miniSectionHeader(event: tupleCategory, count: getCount(tupleCategory.0, eventListViewModel), editing: $showingEdit, category: tupleCategory, eventListViewModel: eventListViewModel, activeSheet: $activeSheet, selectedCell: selectedCell)
                             .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/).foregroundColor(tupleCategory.2).opacity(0.05).transition(.asymmetric(insertion: .scale, removal: .scale)).padding().offset(y:17)).padding(.bottom, offset())
                         
                     }
                     
-                    ForEach(eventListViewModel.eventCellViewModels){ event in
-                        if event.event.hasCategory == false {
-                            withAnimation{
-                                miniCard(eventCellViewModel: event).transition(.move(edge: .leading))
-                            }
-                        }
-                        
-                    }
-
-//                    ForEach(removeDuplicates(multipleCategories), id: \.0){category in
-//
-//                        miniSectionHeader(event: category, count: getCount(category.0, eventListViewModel), category: category, eventListViewModel: eventListViewModel,activeSheet: $activeSheet, selectedCell: selectedCell)
-//                    }
+                    //                    ForEach(removeDuplicates(multipleCategories), id: \.0){category in
+                    //
+                    //                        miniSectionHeader(event: category, count: getCount(category.0, eventListViewModel), category: category, eventListViewModel: eventListViewModel,activeSheet: $activeSheet, selectedCell: selectedCell)
+                    //                    }
                     
                 }else{
                     
@@ -102,9 +94,7 @@ struct ContentView: View {
                     }
                     
                 }
-               
-                
-                
+
             }
         }
         
@@ -153,7 +143,7 @@ struct ContentView: View {
                     selectedCell.selectedCell.event.date = event.date
                     selectedCell.selectedCell.event.fromHour = event.fromHour
                     selectedCell.selectedCell.event.toHour = event.toHour
-
+                    
                 }
                 
             case .third:
@@ -163,53 +153,67 @@ struct ContentView: View {
             }
         }
         
-        
         .navigationBarItems(
             trailing:
-                                HStack {
-                                    
-                                    NavigationLink(destination: miniSettings()) {
-                                        Image(systemName: "gearshape")
-                                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
-                                    }
-                                    
-                                
-                                    Menu {
-                                        Button("Add Event", action: {
-                                            activeSheet = .first
-                                        })
-                                        Button("Add Section", action: {
-                                            activeSheet = .third
-                                        })
-                                            } label: {
-                                                Image(systemName: "plus.circle")
-                                                    .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
-                                            }
-                                    
-                                    Menu {
-                                        
-                                        Section{
-                                            Button("Edit Sections", action: showEdit)
-                                        }
-                                        
-                                        Section{
-                                            Button("Disable sections", action: disableSections)
-                                        }
-                                        
-                                                Button("Order by number", action: placeOrder)
-                                                Button("Order by + recent", action: adjustOrder)
-                                        Button("Order by - recent", action: placeOrder)
-                                            } label: {
-                                                Image(systemName: "ellipsis.circle")
-                                                    .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
-                                            }
-                                    
-                                   
-                                    
-                                    
-                                })
+                HStack {
+                    
+                    NavigationLink(destination: miniSettings()) {
+                        Image(systemName: "gearshape")
+                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
+                    }
+                    
+                    
+                    Menu {
+                        Button("Add Event", action: {
+                            activeSheet = .first
+                        })
+                        Button("Add Section", action: {
+                            activeSheet = .third
+                        })
+                    } label: {
+                        Image(systemName: "plus.circle")
+                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
+                    }
+                    
+                    Menu {
+                        
+                        Section{
+                            Button("Edit Sections", action: showEdit)
+                        }
+                        
+                        Section{
+                            Button("Disable sections", action: disableSections)
+                        }
+                        
+                        Button("Order by number", action: placeOrder)
+                        Button("Order by + recent", action: adjustOrder)
+                        Button("Order by - recent", action: placeOrder)
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
+                    }
+                    
+                    
+                    
+                    
+                })
         
         .navigationTitle("17 Fevereiro 2021")
+        
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                            Button("First") {
+                                print("Pressed")
+                            }
+
+                            Spacer()
+
+                            Button("Second") {
+                                print("Pressed")
+                            }
+                        }
+                }
+        
     }
     
     func showEdit(){
@@ -228,7 +232,7 @@ struct ContentView: View {
 
 
 func placeOrder() { }
-    func adjustOrder() { }
+func adjustOrder() { }
 
 func getCount(_ category : String, _ eventListViewModel : EventListViewModel) -> Int {
     
@@ -278,5 +282,70 @@ struct ContentView_Previews: PreviewProvider {
         }
         
         
+    }
+}
+
+struct ExtractedView: View {
+    
+    @ObservedObject var eventListViewModel:EventListViewModel
+    @Binding var activeSheet: ActiveSheet?
+    @ObservedObject var selectedCell : ObjectToSend
+    
+    var body: some View {
+        
+//        .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/).foregroundColor(.gray).opacity(0.15).transition(.asymmetric(insertion: .scale, removal: .scale)).padding())
+        
+        ZStack{
+//            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/).foregroundColor(.gray).opacity(0.15).transition(.asymmetric(insertion: .scale, removal: .scale)).padding().ignoresSafeArea()
+            VStack{
+                ForEach(eventListViewModel.eventCellViewModels){ event in
+                    if event.event.hasCategory == false {
+                        withAnimation{
+                            miniCard(eventCellViewModel: event).transition(.move(edge: .leading))
+                            
+                            
+                            
+                                .contextMenu(ContextMenu(menuItems: {
+                                    
+//                                    Button(action: {
+//                                        yupiNotification(for: eventCellViewModel.event)
+//                                    }, label: {
+//                                        Label("Turn On notification", systemImage: "bell")
+//                                    })
+                                    
+                                    Button(action: {
+                                        selectedCell.changeCell(event)
+                                        activeSheet = .second
+                                    }, label: {
+                                        Label("Edit", systemImage: "slider.horizontal.3")
+                                    })
+                                    
+//                                    Button(action: {
+//
+//                                        EventRepository.shared.db.collection("events").document(eventCellViewModel.event.id!).delete() { err in
+//
+//                                            if let err = err {
+//                                                print("Error removing document: \(err)")
+//                                            } else {
+//                                                print("Document successfully removed!")
+//                                            }
+//
+//                                        }
+//
+//                                    }, label: {
+//                                        Label("Delete", systemImage: "trash")
+//                                    })
+                                }))
+                            
+                            
+                            
+                            
+//                                .padding([.leading, .trailing])
+                        }
+                    }
+                }
+            }
+//            .padding([.top, .bottom], 20)
+        }
     }
 }
