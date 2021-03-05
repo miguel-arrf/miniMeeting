@@ -10,44 +10,42 @@ import SwiftUI
 struct miniCard: View {
     
     @ObservedObject var eventCellViewModel: EventCellViewModel
-        
-//    @State var showingEdit = false
+    
+    //    @State var showingEdit = false
     
     var body: some View {
-                
+        
+        
+        HStack{
+            withAnimation{
+                Text(eventCellViewModel.event.name)
+                    .fontWeight(.bold)
+                    .foregroundColor(eventCellViewModel.event.textColor)
+            }
+            
+            
+            Spacer()
 
             HStack{
-                withAnimation{
-                    Text(eventCellViewModel.event.name)
-                        .fontWeight(.bold)
-                        .foregroundColor(eventCellViewModel.event.textColor)
-                }
-              
-                
-                Spacer()
                 
                 
+                Text(formatHour(eventCellViewModel.event.fromHour)).fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor).truncationMode(/*@START_MENU_TOKEN@*/.tail/*@END_MENU_TOKEN@*/)
                 
-                HStack{
-                    
-                    
-                    Text(formatHour(eventCellViewModel.event.fromHour)).fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor).truncationMode(/*@START_MENU_TOKEN@*/.tail/*@END_MENU_TOKEN@*/)
-                    
-                    Image(systemName: "arrow.right")
-                        .font(Font.system(.footnote).weight(.heavy)).foregroundColor(eventCellViewModel.event.textColor)
-                    
-                    Text(formatHour(eventCellViewModel.event.toHour)).fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
-                }.frame(minWidth:80).padding(3).padding([.leading,.trailing],10).background(
-                    Color.white
-                        .clipShape(RoundedRectangle(cornerRadius:10))
-                )
+                Image(systemName: "arrow.right")
+                    .font(Font.system(.footnote).weight(.heavy)).foregroundColor(eventCellViewModel.event.textColor)
                 
-            }.padding().frame(maxWidth:.infinity)
-            .background(eventCellViewModel.event.backgroundColor.animation(.easeIn).opacity(0.3).clipShape(RoundedRectangle(cornerRadius:20)))
+                Text(formatHour(eventCellViewModel.event.toHour)).fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
+            }.frame(minWidth:80).padding(3).padding([.leading,.trailing],10).background(
+                Color.white
+                    .clipShape(RoundedRectangle(cornerRadius:10))
+            )
             
-            
-            .contentShape(RoundedRectangle(cornerRadius: 19, style: .continuous))
-            .padding()
+        }.padding().frame(maxWidth:.infinity)
+        .background(eventCellViewModel.event.backgroundColor.animation(.easeIn).opacity(0.3).clipShape(RoundedRectangle(cornerRadius:20)))
+        
+        
+        .contentShape(RoundedRectangle(cornerRadius: 19, style: .continuous))
+        
         
     }
     

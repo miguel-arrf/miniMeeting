@@ -292,26 +292,13 @@ struct ExtractedView: View {
     @ObservedObject var selectedCell : ObjectToSend
     
     var body: some View {
-        
-//        .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/).foregroundColor(.gray).opacity(0.15).transition(.asymmetric(insertion: .scale, removal: .scale)).padding())
-        
         ZStack{
-//            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/).foregroundColor(.gray).opacity(0.15).transition(.asymmetric(insertion: .scale, removal: .scale)).padding().ignoresSafeArea()
             VStack{
                 ForEach(eventListViewModel.eventCellViewModels){ event in
                     if event.event.hasCategory == false {
                         withAnimation{
                             miniCard(eventCellViewModel: event).transition(.move(edge: .leading))
-                            
-                            
-                            
                                 .contextMenu(ContextMenu(menuItems: {
-                                    
-//                                    Button(action: {
-//                                        yupiNotification(for: eventCellViewModel.event)
-//                                    }, label: {
-//                                        Label("Turn On notification", systemImage: "bell")
-//                                    })
                                     
                                     Button(action: {
                                         selectedCell.changeCell(event)
@@ -320,32 +307,12 @@ struct ExtractedView: View {
                                         Label("Edit", systemImage: "slider.horizontal.3")
                                     })
                                     
-//                                    Button(action: {
-//
-//                                        EventRepository.shared.db.collection("events").document(eventCellViewModel.event.id!).delete() { err in
-//
-//                                            if let err = err {
-//                                                print("Error removing document: \(err)")
-//                                            } else {
-//                                                print("Document successfully removed!")
-//                                            }
-//
-//                                        }
-//
-//                                    }, label: {
-//                                        Label("Delete", systemImage: "trash")
-//                                    })
                                 }))
-                            
-                            
-                            
-                            
-//                                .padding([.leading, .trailing])
+   
                         }
                     }
                 }
             }
-//            .padding([.top, .bottom], 20)
         }
     }
 }

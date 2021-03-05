@@ -13,7 +13,7 @@
 		1E13BA7625EDA5A700D2F1B1 /* miniCardTestTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E13BA7525EDA5A700D2F1B1 /* miniCardTestTwo.swift */; };
 		1E21BC0E25DE8E4A00170C9E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E21BC0D25DE8E4A00170C9E /* GoogleService-Info.plist */; };
 		1E44258C25E9C8C700102B88 /* miniEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E44258B25E9C8C700102B88 /* miniEventDetailView.swift */; };
-		1E4AC7B825F18E3A002AB11A /* miniSectionHeaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4AC7B725F18E3A002AB11A /* miniSectionHeaderTest.swift */; };
+		1E4AC7B825F18E3A002AB11A /* miniCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4AC7B725F18E3A002AB11A /* miniCategoryHeader.swift */; };
 		1E61D74525DDECC80047B1C8 /* miniMeetingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E61D74425DDECC80047B1C8 /* miniMeetingApp.swift */; };
 		1E61D74725DDECC80047B1C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E61D74625DDECC80047B1C8 /* ContentView.swift */; };
 		1E61D74925DDECC90047B1C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E61D74825DDECC90047B1C8 /* Assets.xcassets */; };
@@ -37,6 +37,8 @@
 		1EB52C4925E01F100014DBCC /* miniMeetingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB52C4825E01F100014DBCC /* miniMeetingWidget.swift */; };
 		1EB52C4B25E01F130014DBCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EB52C4A25E01F130014DBCC /* Assets.xcassets */; };
 		1EB52C4F25E01F130014DBCC /* miniMeetingWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1EB52C4225E01F100014DBCC /* miniMeetingWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1EBB645A25F25F5200D52104 /* newContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB645925F25F5200D52104 /* newContentView.swift */; };
+		1EBB646225F264E800D52104 /* miniEmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB646125F264E800D52104 /* miniEmojiPicker.swift */; };
 		1ED5441825ED03CF00843218 /* miniCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED5441725ED03CF00843218 /* miniCategoryView.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +72,7 @@
 		1E13BA7525EDA5A700D2F1B1 /* miniCardTestTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCardTestTwo.swift; sourceTree = "<group>"; };
 		1E21BC0D25DE8E4A00170C9E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1E44258B25E9C8C700102B88 /* miniEventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniEventDetailView.swift; sourceTree = "<group>"; };
-		1E4AC7B725F18E3A002AB11A /* miniSectionHeaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniSectionHeaderTest.swift; sourceTree = "<group>"; };
+		1E4AC7B725F18E3A002AB11A /* miniCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCategoryHeader.swift; sourceTree = "<group>"; };
 		1E61D74125DDECC80047B1C8 /* miniMeeting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniMeeting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E61D74425DDECC80047B1C8 /* miniMeetingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniMeetingApp.swift; sourceTree = "<group>"; };
 		1E61D74625DDECC80047B1C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +100,8 @@
 		1EB52C4A25E01F130014DBCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EB52C4C25E01F130014DBCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EB52C5625E028770014DBCC /* miniMeetingGestures.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = miniMeetingGestures.playground; path = ../../miniMeetingGestures.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1EBB645925F25F5200D52104 /* newContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newContentView.swift; sourceTree = "<group>"; };
+		1EBB646125F264E800D52104 /* miniEmojiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniEmojiPicker.swift; sourceTree = "<group>"; };
 		1ED5441725ED03CF00843218 /* miniCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCategoryView.swift; sourceTree = "<group>"; };
 		52B1F8F7CDDED46335A0575E /* Pods-miniMeeting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniMeeting.release.xcconfig"; path = "Target Support Files/Pods-miniMeeting/Pods-miniMeeting.release.xcconfig"; sourceTree = "<group>"; };
 		E5F565560582C0B834C9B3BC /* Pods-miniMeeting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniMeeting.debug.xcconfig"; path = "Target Support Files/Pods-miniMeeting/Pods-miniMeeting.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,16 +175,18 @@
 				1E860FC925DEACB5007A3A67 /* Model */,
 				1E1172E125DE887C00CC0DCB /* miniCard.swift */,
 				1E21BC0D25DE8E4A00170C9E /* GoogleService-Info.plist */,
-				1E860FD825DED05E007A3A67 /* miniEventFormView.swift */,
+				1EBB646125F264E800D52104 /* miniEmojiPicker.swift */,
 				1EB486EC25DFDC5F003EE2D3 /* miniSectionHeader.swift */,
 				1EB486EF25DFEF21003EE2D3 /* NumberTextField.swift */,
 				1E76C42A25E1976D00074FD4 /* miniColorPicker.swift */,
 				1E76C42E25E1D9D500074FD4 /* miniSettings.swift */,
 				1E44258B25E9C8C700102B88 /* miniEventDetailView.swift */,
+				1E860FD825DED05E007A3A67 /* miniEventFormView.swift */,
 				1EA1C9A325EA5CB900C2C0F2 /* miniCategoryFormView.swift */,
 				1ED5441725ED03CF00843218 /* miniCategoryView.swift */,
 				1E13BA7525EDA5A700D2F1B1 /* miniCardTestTwo.swift */,
-				1E4AC7B725F18E3A002AB11A /* miniSectionHeaderTest.swift */,
+				1E4AC7B725F18E3A002AB11A /* miniCategoryHeader.swift */,
+				1EBB645925F25F5200D52104 /* newContentView.swift */,
 			);
 			path = miniMeeting;
 			sourceTree = "<group>";
@@ -397,6 +403,7 @@
 				1E860FCF25DEAEC1007A3A67 /* EventCellViewModel.swift in Sources */,
 				1E13BA7625EDA5A700D2F1B1 /* miniCardTestTwo.swift in Sources */,
 				1ED5441825ED03CF00843218 /* miniCategoryView.swift in Sources */,
+				1EBB645A25F25F5200D52104 /* newContentView.swift in Sources */,
 				1EA1C99C25EA59BD00C2C0F2 /* CategoryRepository.swift in Sources */,
 				1E1172E225DE887C00CC0DCB /* miniCard.swift in Sources */,
 				1EB486F025DFEF21003EE2D3 /* NumberTextField.swift in Sources */,
@@ -410,11 +417,12 @@
 				1E860FD225DEC995007A3A67 /* EventListViewModel.swift in Sources */,
 				1E61D74525DDECC80047B1C8 /* miniMeetingApp.swift in Sources */,
 				1EA1C99825EA595400C2C0F2 /* Category.swift in Sources */,
-				1E4AC7B825F18E3A002AB11A /* miniSectionHeaderTest.swift in Sources */,
+				1E4AC7B825F18E3A002AB11A /* miniCategoryHeader.swift in Sources */,
 				1E44258C25E9C8C700102B88 /* miniEventDetailView.swift in Sources */,
 				1EA1C9A425EA5CB900C2C0F2 /* miniCategoryFormView.swift in Sources */,
 				1E61D75525DDED570047B1C8 /* Event.swift in Sources */,
 				1E76C42F25E1D9D500074FD4 /* miniSettings.swift in Sources */,
+				1EBB646225F264E800D52104 /* miniEmojiPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct miniSectionHeaderTest: View {
+struct miniCategoryHeader: View {
     
     var category : Category
     
@@ -38,7 +38,7 @@ struct miniSectionHeaderTest: View {
 
 struct miniSectionHeaderTest_Previews: PreviewProvider {
     static var previews: some View {
-        miniSectionHeaderTest(category: Category(name: "Escola", backgroundColor: fixedColors[0].toSwiftUIColor, textColor: .white))
+        miniCategoryHeader(category: Category(name: "Escola", backgroundColor: fixedColors[0].toSwiftUIColor, textColor: .white))
     }
 }
 
@@ -52,9 +52,9 @@ struct Card: View {
             RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(category.backgroundColor)
                 .blendMode(.multiply)
-                .frame(width: 40, height: 40).overlay(
+                .frame(width: 30, height: 30).overlay(
                     Text("🤩")
-                ).padding([.bottom, .trailing, .top]).padding(.leading, 20)
+                ).padding([.trailing]).padding(.leading, 20)
             
             
             
@@ -62,8 +62,9 @@ struct Card: View {
                 .foregroundColor(category.textColor)
                 .font(.title3)
                 .fontWeight(.bold)
-                .padding([.top, .bottom])
+                .padding([.vertical])
             Spacer()
+            Image(systemName: "chevron.forward").foregroundColor(.white).padding()
         }
         .background(RoundedRectangle(cornerRadius: 20).foregroundColor(category.backgroundColor).opacity(1).transition(.asymmetric(insertion: .scale, removal: .scale))).padding([.leading, .trailing])
     }

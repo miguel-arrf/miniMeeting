@@ -17,6 +17,30 @@ struct miniCategoryFormView: View {
     var body: some View {
       
             Form{
+                
+                Section(header: Text("Icon")){
+                    HStack(){
+                        Group{
+                            Text("🤩")
+                            Spacer()
+                            
+                            Text("😎")
+                            Spacer()
+                            
+                            Text("🚀")
+                            Spacer()
+                        }
+                        Text("😚")
+                        Spacer()
+                        
+                        Text("🎓")
+                        Spacer()
+                        
+                        Text("🤓")
+                        
+                    }
+                }
+                
                 Section(header: Text("Hours ⏰").padding(.top)){
                     TextField("Name", text: $categoryViewModel.category.name)
                 }
