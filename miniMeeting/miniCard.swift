@@ -10,9 +10,7 @@ import SwiftUI
 struct miniCard: View {
     
     @ObservedObject var eventCellViewModel: EventCellViewModel
-    
-    //    @State var showingEdit = false
-    
+        
     var body: some View {
         
         
@@ -41,8 +39,7 @@ struct miniCard: View {
             )
             
         }.padding().frame(maxWidth:.infinity)
-        .background(eventCellViewModel.event.backgroundColor.animation(.easeIn).opacity(0.3).clipShape(RoundedRectangle(cornerRadius:20)))
-        
+        .background(eventCellViewModel.event.backgroundColor.opacity(0.3).clipShape(RoundedRectangle(cornerRadius:20)))
         
         .contentShape(RoundedRectangle(cornerRadius: 19, style: .continuous))
         

@@ -19,10 +19,10 @@ struct newContentView: View {
     @ObservedObject var selectedCell = ObjectToSend()
     
     init() {
-        UINavigationBar.appearance().largeTitleTextAttributes =
+        /*UINavigationBar.appearance().largeTitleTextAttributes =
             [.font: UIFont(descriptor:
                             UIFontDescriptor.preferredFontDescriptor(withTextStyle: .largeTitle)
-                            .withDesign(.serif)!, size: 30)]
+                            .withDesign(.serif)!, size: 30)]*/
         
         self.eventListViewModel = EventListViewModel()
     }
@@ -50,11 +50,14 @@ struct newContentView: View {
                     ForEach(eventListViewModel.categoryViewModels){categoryViewModel in
                         let category = categoryViewModel.category
                             
+                        withAnimation{
                             miniCategoryHeader(category: category)
                                 .onTapGesture {
                                     selectedCategory = categoryViewModel
                                     showDetailView.toggle()
                                 }
+                        }
+                           
 
                     }
                 }
@@ -186,51 +189,61 @@ struct NoCategoryCards: View {
     var body: some View {
         ZStack{
             LazyVStack(spacing: 20){
-                ForEach(eventListViewModel.eventCellViewModels, id: \.id){ event in
+                
+                ForEach(eventListViewModel.eventCellViewModels){ event in
+                   
+                    
                     if event.event.hasCategory == false {
                         withAnimation{
+                            VStack{
                             miniCard(eventCellViewModel: event)
-                                .contextMenu(ContextMenu(menuItems: {
-                                    
-                                    Button(action: {
-                                        yupiNotification(for: event.event)
-                                    }, label: {
-                                        Label("Turn On notification", systemImage: "bell")
-                                    })
-                                    
-                                    Button(action: {
-                                        selectedCell.changeCell(event)
-                                        activeSheet = .second
-                                    }, label: {
-                                        Label("Edit", systemImage: "slider.horizontal.3")
-                                    })
-                                    
-                                    Button(action: {
-                                        
-                                        
-                                            EventRepository.shared.db.collection("events").document(event.event.id!).delete() { err in
-                                                
-                                                if let err = err {
-                                                    print("Error removing document: \(err)")
-                                                } else {
-                                                    print("Document successfully removed!")
-                                                }
-                                                
-                                            }
-                                        
-                                        
-                                        
-                                    }, label: {
-                                        Label("Delete", systemImage: "trash")
-                                    })
-                                }))
-                                
+                         
                                 .padding([.leading, .trailing])
-                                .transition(.asymmetric(insertion: .move(edge:.leading), removal: .move(edge:.trailing)))
+                            }.contextMenu(ContextMenu(menuItems: {
+                                
+                                Button(action: {
+                                    yupiNotification(for: event.event)
+                                }, label: {
+                                    Label("Turn On notification", systemImage: "bell")
+                                })
+                                
+                                Button(action: {
+                                    selectedCell.changeCell(event)
+                                    activeSheet = .second
+                                }, label: {
+                                    Label("Edit", systemImage: "slider.horizontal.3")
+                                })
+                                
+                                Button(action: {
+                                    
+
+                                        //eventListViewModel.addEvent(event: event)
+                                        /*withAnimation{
+                                            eventListViewModel.removeEvent(event: event.event)
+                                        }*/
+
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){
+                                        eventListViewModel.eventCellViewModels.removeAll{$0.event.id == event.event.id}
+                                    }
+                                        
+                                        /*EventRepository.shared.db.collection("events").document(event.event.id!).delete() { err in
+                                            if let err = err {
+                                                print("Error removing document: \(err)")
+                                            } else {
+                                                print("Document successfully removed!")
+                                            }
+                                        }*/
+    
+                                        
+                                }, label: {
+                                    Label("Delete", systemImage: "trash")
+                                })
+                            }))
                         }
                     }
                 }
-            }
+                
+            }.animation(.spring(), value: eventListViewModel.eventCellViewModels)
         }
     }
     

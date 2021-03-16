@@ -16,8 +16,16 @@ class EventListViewModel: ObservableObject {
     private var cancellablesEvents = Set<AnyCancellable>()
     private var cancellablesCategories = Set<AnyCancellable>()
 
-    
     init() {
+        
+        EventRepository.shared.$events.map{ events in
+            events.map{ event in
+                EventCellViewModel(event: event)
+            }
+            
+        }.assign(to: \.eventCellViewModels, on:self)
+        .store(in: &cancellablesEvents)
+        
         
         CategoryRepository.shared.$categories.map{ categories in
             categories.map{ category in
@@ -26,16 +34,6 @@ class EventListViewModel: ObservableObject {
         }.assign(to: \.categoryViewModels, on:self)
         .store(in: &cancellablesCategories)
         
-        EventRepository.shared.$events.map{ events in
-            events.map{ event in
-                EventCellViewModel(event: event)
-            }
-        }.assign(to: \.eventCellViewModels, on:self)
-        .store(in: &cancellablesEvents)
-        
-        
-       
-        
     }
     
     func addEvent(event: Event) {
@@ -43,6 +41,10 @@ class EventListViewModel: ObservableObject {
 //        let eventViewModel = EventCellViewModel(event: event)
 //        self.eventCellViewModels.append(eventViewModel)
         
+    }
+    
+    func removeEvent(event: Event){
+        EventRepository.shared.removeEvent(event)
     }
     
     func addCategory(category: Category){

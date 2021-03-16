@@ -27,25 +27,24 @@ class EventRepository: ObservableObject {
         let userId = Auth.auth().currentUser?.uid
         
         db.collection("events")
-            .whereField("userId", isEqualTo: userId)
+            .whereField("userId", isEqualTo: userId!)
             .order(by: "createdTime")
             .addSnapshotListener { (querySnapshot, error) in
 
             if let querySnapshot = querySnapshot {
                 withAnimation{
-                self.events = querySnapshot.documents.compactMap{ document in
+                    self.events = querySnapshot.documents.compactMap{ document in
+                        do{
+                            
+                            let x = try document.data(as: Event.self)
 
-                    do{
-                        
-                        let x = try document.data(as: Event.self)
-
-                        return x
+                            return x
+                        }
+                        catch{
+                            print(error)
+                        }
+                        return nil
                     }
-                    catch{
-                        print(error)
-                    }
-                    return nil
-                }
                 }
                 
             }
@@ -61,6 +60,16 @@ class EventRepository: ObservableObject {
         }
         catch{
             fatalError("Unable to encode task: \(error.localizedDescription)")
+        }
+    }
+    
+    func removeEvent(_ event: Event){
+        do{
+
+            let _ = try db.collection("events").document(event.id!).delete()
+        }
+        catch {
+            fatalError("Unable to remove")
         }
     }
     

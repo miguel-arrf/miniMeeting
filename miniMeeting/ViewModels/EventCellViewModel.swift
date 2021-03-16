@@ -8,12 +8,14 @@
 import Foundation
 import Combine
 
-class EventCellViewModel: ObservableObject, Identifiable {
-    
+class EventCellViewModel: ObservableObject, Identifiable, Equatable {
+    static func == (lhs: EventCellViewModel, rhs: EventCellViewModel) -> Bool {
+        lhs.event.id == rhs.event.id
+    }
     
     @Published var event: Event
         
-    var id = UUID().uuidString
+    var id : String = ""
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -22,7 +24,7 @@ class EventCellViewModel: ObservableObject, Identifiable {
         
         $event
             .compactMap{event in
-                event.id
+                return event.id
             }
             .assign(to: \.id, on:self)
             .store(in: &cancellables)
