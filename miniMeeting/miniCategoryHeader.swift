@@ -9,7 +9,7 @@ import SwiftUI
 
 struct miniCategoryHeader: View {
     
-    var category : Category
+    @ObservedObject var category : CategoryViewModel
     var withDetailView: Bool = true
     var body: some View {
         
@@ -38,30 +38,30 @@ struct miniCategoryHeader: View {
 
 struct miniSectionHeaderTest_Previews: PreviewProvider {
     static var previews: some View {
-        miniCategoryHeader(category: Category(name: "Escola", backgroundColor: fixedColors[0].toSwiftUIColor, textColor: .white))
+        miniCategoryHeader(category: CategoryViewModel(category: Category(name: "Escola", backgroundColor: fixedColors[0], textColor: .white, emoji: fixedEmojis[0])))
     }
 }
 
 struct Card: View {
     
-    var category: Category
+    @ObservedObject var category: CategoryViewModel
     var withDetailView: Bool
     
     var body: some View {
         HStack{
             
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(category.backgroundColor)
+                .foregroundColor(category.category.backgroundColor)
                 .blendMode(.multiply)
                 .frame(width: 30, height: 30)
                 .overlay(
-                    Text("🤩")
+                    Text("\(category.category.emoji)")
                 ).padding([.trailing]).padding(.leading, 20)
             
         
             
-            Text("\(category.name)")
-                .foregroundColor(category.textColor)
+            Text("\(category.category.name)")
+                .foregroundColor(category.category.textColor)
                 .font(.title3)
                 .fontWeight(.bold)
                 .padding([.vertical])
@@ -77,8 +77,8 @@ struct Card: View {
 //                .clipShape(RoundedRectangle(cornerRadius: 20))
 //                           .edgesIgnoringSafeArea(.all)
 //        )
-        .background(RoundedRectangle(cornerRadius: 20).foregroundColor(category.backgroundColor).opacity(1).transition(.asymmetric(insertion: .scale, removal: .scale)))
-        .padding([.leading, .trailing])
+        .background(RoundedRectangle(cornerRadius: 20).foregroundColor(category.category.backgroundColor).transition(.asymmetric(insertion: .scale, removal: .scale)))
+        //.padding([.leading, .trailing])
     }
 }
 

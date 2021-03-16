@@ -29,12 +29,6 @@ struct miniEventFormView: View {
             Form{
                 
                 VStack {
-                    //                    HStack {
-                    //                        Text(eventCellViewModel.event.category)
-                    //                            .fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
-                    //                        Spacer()
-                    //                    }.padding([.leading, .trailing, .top])
-                    
                     miniCard(eventCellViewModel: eventCellViewModel).padding(.vertical)
                 }
                 
@@ -50,7 +44,19 @@ struct miniEventFormView: View {
                         Text("Created categories:")
                         Spacer()
                         
-                        Picker("Category", selection: $eventCellViewModel.event.category) {
+                        
+                        let selectedCategory : String = {
+                            if eventCellViewModel.event.hasCategory == false {
+                                return "No category"
+                            }else{
+                                return eventCellViewModel.event.category
+                            }
+                            
+                        }()
+                        
+                        
+                        
+                        Picker(selectedCategory, selection: $eventCellViewModel.event.category) {
                             ForEach(multipleCategories, id: \.self) {
                                 Text($0)
                             }
@@ -58,24 +64,8 @@ struct miniEventFormView: View {
                     }.disabled(eventCellViewModel.event.hasCategory ? false : true)
                 }
                 
-                Section(header: Text("Hours ⏰")){
-                    //                    HStack {
-                    //                        Text("From Hour:")
-                    //                        NumberTextField(value: $eventCellViewModel.event.fromHourOld)
-                    //                    }
-                    //
-                    //                    HStack {
-                    //                        Text("To Hour:")
-                    //                        NumberTextField(value: $eventCellViewModel.event.toHourOld)
-                    //                    }
-                    
-                    DatePicker("Date", selection: $eventCellViewModel.event.date, displayedComponents: .date)
-                    DatePicker("Start Hour", selection: $eventCellViewModel.event.fromHour, displayedComponents: .hourAndMinute)
-                    DatePicker("End Hour", selection: $eventCellViewModel.event.toHour, displayedComponents: .hourAndMinute)
-                }
-                
                 Section(header: Text("Link 💻")){
-                    TextField("Website", text: $eventCellViewModel.event.category)
+                    TextField("Website", text: $eventCellViewModel.event.link)
                         .textContentType(.URL)
                         .keyboardType(.URL)
                 }
@@ -83,13 +73,7 @@ struct miniEventFormView: View {
                 Section(header: Text("Style 😎")) {
                     ColorChooser(selectedColor: selectedColor, event: eventCellViewModel)
                     
-                    //                    ColorPicker("Background Color", selection: $eventCellViewModel.event.backgroundColor)
-                    //                    ColorPicker("Text Color", selection: $eventCellViewModel.event.textColor)
-                    
-                    
-                    
                 }
-                
                 
                 
                 Button(action: {
@@ -122,6 +106,9 @@ struct miniEventFormView: View {
                             
                             if eventCellViewModel.event.name.isEmpty {
                                 showingAlert.toggle()
+                            }else{
+                                self.onCommit(self.eventCellViewModel.event)
+                                presentationMode.wrappedValue.dismiss()
                             }
                             
                         }, label: {
@@ -134,7 +121,7 @@ struct miniEventFormView: View {
                 
             }
             
-            .navigationTitle("Edit")
+            .navigationTitle("New Event")
             
         }
     }
@@ -142,12 +129,13 @@ struct miniEventFormView: View {
 
 struct miniEventFormView_Previews: PreviewProvider {
     static var previews: some View {
-        miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "teste", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: .blue, textColor: .black)), multipleCategories: ["C1","C2","C3"])
+        miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "teste", hasCategory : false, backgroundColor: fixedColors[0], textColor: .black, link: "www.google.pt")), multipleCategories: ["C1","C2","C3"])
+        
     }
 }
 
 class ColorSelected : ObservableObject{
-    @Published var selectedColor : Color = fixedColors[0].toSwiftUIColor
+    @Published var selectedColor : Color = fixedColors[0]
     
     func changeColor(_ color: Color) {
         selectedColor = color
@@ -164,15 +152,15 @@ struct ColorChooser: View {
             
             ForEach(fixedColors, id: \.self){ uiColor in
                 
-                Circle().strokeBorder(uiColor.toSwiftUIColor, lineWidth: uiColor.toSwiftUIColor == selectedColor.selectedColor ? 3 : 0).blendMode(.plusDarker)
+                Circle().strokeBorder(uiColor, lineWidth: uiColor == selectedColor.selectedColor ? 3 : 0).blendMode(.plusDarker)
                     
-                    .background(Circle().foregroundColor(uiColor.toSwiftUIColor))
+                    .background(Circle().foregroundColor(uiColor))
                     .frame( maxWidth: .infinity, minHeight: 22, maxHeight: 22)
                     .onTapGesture {
                         withAnimation{
                             
-                            selectedColor.changeColor(uiColor.toSwiftUIColor)
-                            event.event.backgroundColor = uiColor.toSwiftUIColor
+                            selectedColor.changeColor(uiColor)
+                            event.event.backgroundColor = uiColor
                         }
                     }
                 

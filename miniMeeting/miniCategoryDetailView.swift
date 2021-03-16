@@ -76,7 +76,7 @@ struct miniCategoryDetailView: View {
             
             
             if item == .first {
-                miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: Color.black.opacity(0.3), textColor: .black)), multipleCategories: multipleCategories) { event in
+                miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "", backgroundColor: Color.black.opacity(0.3), textColor: .black)), multipleCategories: multipleCategories) { event in
                     
                     self.eventListViewModel.addEvent(event: event)
                 }
@@ -110,7 +110,7 @@ struct miniCategoryDetailView: View {
 struct miniCategoryDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            miniCategoryDetailView(categoryViewModel: CategoryViewModel(category: Category(name: "Escola", backgroundColor: fixedColors[0].toSwiftUIColor, textColor: .white)), eventListViewModel: EventListViewModel())
+            miniCategoryDetailView(categoryViewModel: CategoryViewModel(category: Category(name: "Escola", backgroundColor: fixedColors[0], textColor: .white, emoji: fixedEmojis[0])), eventListViewModel: EventListViewModel())
         }
         
     }

@@ -17,6 +17,8 @@ struct Category: Codable, Identifiable{
     var backgroundColor: Color
     var textColor: Color
     
+    var emoji:String
+    
     var userId : String?
     @ServerTimestamp var createdTime: Timestamp?
     

@@ -44,6 +44,7 @@ fileprivate extension Color {
 }
 
 extension Color: Codable {
+    
     enum CodingKeys: String, CodingKey {
         case red, green, blue
     }
@@ -59,8 +60,17 @@ extension Color: Codable {
         let g = try container.decode(Double.self, forKey: .green)
         let b = try container.decode(Double.self, forKey: .blue)
         
+        if( 0.82 < r && r < 0.84 && 0.94 < g && g < 0.95 && 0.990 < b && b < 0.992){
+            self.init("Blue")
+        }else{
+
+            
+            
+            print(" --- DECODING COLOR --- r:\(r) g:\(g) b:\(b)")
+            
+            self.init(red: r, green: g, blue: b)
+        }
         
-        self.init(red: r, green: g, blue: b)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -30,7 +30,7 @@ struct miniCategoryView: View {
                 Text("hehe - 2")
                 
             case .third:
-                miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "New Category", backgroundColor: .orange, textColor: .blue))){ category in
+                miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "New Category", backgroundColor: .orange, textColor: .blue, emoji: fixedEmojis[0]))){ category in
                     self.eventListViewModel.addCategory(category: category)
                 }
             }

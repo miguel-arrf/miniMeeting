@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		08FAC983A95CF27C08596B87 /* Pods_miniMeeting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF277A3147A6198906082625 /* Pods_miniMeeting.framework */; };
 		1E1172E225DE887C00CC0DCB /* miniCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1172E125DE887C00CC0DCB /* miniCard.swift */; };
-		1E13BA7225ED9EB300D2F1B1 /* miniCardTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E13BA7125ED9EB300D2F1B1 /* miniCardTest.swift */; };
-		1E13BA7625EDA5A700D2F1B1 /* miniCardTestTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E13BA7525EDA5A700D2F1B1 /* miniCardTestTwo.swift */; };
 		1E21BC0E25DE8E4A00170C9E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E21BC0D25DE8E4A00170C9E /* GoogleService-Info.plist */; };
 		1E44258C25E9C8C700102B88 /* miniEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E44258B25E9C8C700102B88 /* miniEventDetailView.swift */; };
 		1E4AC7B825F18E3A002AB11A /* miniCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4AC7B725F18E3A002AB11A /* miniCategoryHeader.swift */; };
@@ -69,8 +67,6 @@
 
 /* Begin PBXFileReference section */
 		1E1172E125DE887C00CC0DCB /* miniCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCard.swift; sourceTree = "<group>"; };
-		1E13BA7125ED9EB300D2F1B1 /* miniCardTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCardTest.swift; sourceTree = "<group>"; };
-		1E13BA7525EDA5A700D2F1B1 /* miniCardTestTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCardTestTwo.swift; sourceTree = "<group>"; };
 		1E21BC0D25DE8E4A00170C9E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1E44258B25E9C8C700102B88 /* miniEventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniEventDetailView.swift; sourceTree = "<group>"; };
 		1E4AC7B725F18E3A002AB11A /* miniCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCategoryHeader.swift; sourceTree = "<group>"; };
@@ -170,7 +166,6 @@
 				1E61D74425DDECC80047B1C8 /* miniMeetingApp.swift */,
 				1E860FCD25DEAEAB007A3A67 /* ViewModels */,
 				1E61D74625DDECC80047B1C8 /* ContentView.swift */,
-				1E13BA7125ED9EB300D2F1B1 /* miniCardTest.swift */,
 				1E61D74825DDECC90047B1C8 /* Assets.xcassets */,
 				1E61D74D25DDECC90047B1C8 /* Info.plist */,
 				1E61D74A25DDECC90047B1C8 /* Preview Content */,
@@ -186,7 +181,6 @@
 				1E860FD825DED05E007A3A67 /* miniEventFormView.swift */,
 				1EA1C9A325EA5CB900C2C0F2 /* miniCategoryFormView.swift */,
 				1ED5441725ED03CF00843218 /* miniCategoryView.swift */,
-				1E13BA7525EDA5A700D2F1B1 /* miniCardTestTwo.swift */,
 				1E4AC7B725F18E3A002AB11A /* miniCategoryHeader.swift */,
 				1EBB645925F25F5200D52104 /* newContentView.swift */,
 				1E7AEF1425F2B8E400698353 /* miniCategoryDetailView.swift */,
@@ -402,9 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E13BA7225ED9EB300D2F1B1 /* miniCardTest.swift in Sources */,
 				1E860FCF25DEAEC1007A3A67 /* EventCellViewModel.swift in Sources */,
-				1E13BA7625EDA5A700D2F1B1 /* miniCardTestTwo.swift in Sources */,
 				1ED5441825ED03CF00843218 /* miniCategoryView.swift in Sources */,
 				1EBB645A25F25F5200D52104 /* newContentView.swift in Sources */,
 				1EA1C99C25EA59BD00C2C0F2 /* CategoryRepository.swift in Sources */,

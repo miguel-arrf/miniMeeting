@@ -11,7 +11,7 @@ struct newContentView: View {
     
     @ObservedObject var eventListViewModel = EventListViewModel()
     
-    @State var selectedCategory: CategoryViewModel = CategoryViewModel(category: Category(name: "Escola", backgroundColor: fixedColors[0].toSwiftUIColor, textColor: .white))
+    @State var selectedCategory: CategoryViewModel = CategoryViewModel(category: Category(name: "Escola", backgroundColor: fixedColors[0], textColor: .white, emoji: fixedEmojis[0]))
     
     @State var showDetailView: Bool = false
     @State var activeSheet: ActiveSheet?
@@ -48,16 +48,14 @@ struct newContentView: View {
                 
                 LazyVStack(spacing: 20) {
                     ForEach(eventListViewModel.categoryViewModels){categoryViewModel in
-                        let category = categoryViewModel.category
                             
                         withAnimation{
-                            miniCategoryHeader(category: category)
+                            miniCategoryHeader(category: categoryViewModel).padding([.leading, .trailing])
                                 .onTapGesture {
                                     selectedCategory = categoryViewModel
                                     showDetailView.toggle()
                                 }
                         }
-                           
 
                     }
                 }
@@ -89,7 +87,7 @@ struct newContentView: View {
             
             switch item {
             case .first:
-                miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: Color.black.opacity(0.3), textColor: .black)), multipleCategories: multipleCategories) { event in
+                miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "", hasCategory : false, backgroundColor: fixedColors[0], textColor: .black)), multipleCategories: multipleCategories) { event in
                     
                     self.eventListViewModel.addEvent(event: event)
                 }
@@ -99,9 +97,7 @@ struct newContentView: View {
                     event: Event(
                         name: selectedCell.selectedCell.event.name,
                         category: selectedCell.selectedCell.event.category,
-                        date : selectedCell.selectedCell.event.date,
-                        fromHour: selectedCell.selectedCell.event.fromHour,
-                        toHour: selectedCell.selectedCell.event.toHour, backgroundColor: selectedCell.selectedCell.event.backgroundColor,
+                        backgroundColor: selectedCell.selectedCell.event.backgroundColor,
                         textColor: selectedCell.selectedCell.event.textColor)
                 )
                 
@@ -110,14 +106,10 @@ struct newContentView: View {
                     selectedCell.selectedCell.event.category = event.category
                     selectedCell.selectedCell.event.backgroundColor = event.backgroundColor
                     selectedCell.selectedCell.event.textColor = event.textColor
-                    selectedCell.selectedCell.event.date = event.date
-                    selectedCell.selectedCell.event.fromHour = event.fromHour
-                    selectedCell.selectedCell.event.toHour = event.toHour
-                    
                 }
                 
             case .third:
-                miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "New Category", backgroundColor: .orange, textColor: .blue))){ category in
+                miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "", backgroundColor: fixedColors[0], textColor: .black, emoji: fixedEmojis[0]))){ category in
                     self.eventListViewModel.addCategory(category: category)
                 }
             }
@@ -129,7 +121,7 @@ struct newContentView: View {
                     
                     NavigationLink(destination: miniSettings()) {
                         Image(systemName: "gearshape")
-                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
+                            .font(Font.system(.body).weight(.bold)).foregroundColor(Color("WhiteAndBlack"))
                     }
                     
                     Menu {
@@ -141,7 +133,7 @@ struct newContentView: View {
                         })
                     } label: {
                         Image(systemName: "plus.circle")
-                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
+                            .font(Font.system(.body).weight(.bold)).foregroundColor(Color("WhiteAndBlack"))
                     }
                     
                     Menu {
@@ -159,7 +151,7 @@ struct newContentView: View {
                         Button("Order by - recent", action: placeOrder)
                     } label: {
                         Image(systemName: "ellipsis.circle")
-                            .font(Font.system(.body).weight(.bold)).foregroundColor(.black)
+                            .font(Font.system(.body).weight(.bold)).foregroundColor(Color("WhiteAndBlack"))
                     }
                     
                     
@@ -202,11 +194,13 @@ struct NoCategoryCards: View {
                             }.contextMenu(ContextMenu(menuItems: {
                                 
                                 Button(action: {
-                                    yupiNotification(for: event.event)
+                                    let pasteboard = UIPasteboard.general
+                                    pasteboard.string =  URL(string: event.event.link)?.absoluteString
                                 }, label: {
-                                    Label("Turn On notification", systemImage: "bell")
+                                    Label("Copy Link", systemImage: "doc.on.clipboard")
                                 })
                                 
+            
                                 Button(action: {
                                     selectedCell.changeCell(event)
                                     activeSheet = .second
@@ -223,16 +217,18 @@ struct NoCategoryCards: View {
                                         }*/
 
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){
-                                        eventListViewModel.eventCellViewModels.removeAll{$0.event.id == event.event.id}
-                                    }
+//                                        eventListViewModel.eventCellViewModels.removeAll{$0.event.id == event.event.id}
                                         
-                                        /*EventRepository.shared.db.collection("events").document(event.event.id!).delete() { err in
+                                        EventRepository.shared.db.collection("events").document(event.event.id!).delete() { err in
                                             if let err = err {
                                                 print("Error removing document: \(err)")
                                             } else {
                                                 print("Document successfully removed!")
                                             }
-                                        }*/
+                                        }
+                                    }
+                                        
+                                        
     
                                         
                                 }, label: {

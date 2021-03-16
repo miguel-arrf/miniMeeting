@@ -140,29 +140,7 @@ func yupiNotification(for event: Event) {
 
 func getNotification(for event: Event, for center: UNUserNotificationCenter, for number: NSNumber){
     
-        let content = UNMutableNotificationContent()
-        content.title = "\(event.name)"
-        content.subtitle = "\(event.category)"
-        content.badge = number
-        
-        content.sound = UNNotificationSound.default
-        
-        
-        let calendar = Calendar.current
-        
-        var dateComponents = DateComponents()
-        dateComponents.minute = calendar.component(.minute, from: event.fromHour)
-        dateComponents.hour = calendar.component(.hour, from: event.fromHour)
-        dateComponents.day = calendar.component(.day, from: event.date)
-        dateComponents.month = calendar.component(.month, from: event.date)
-        dateComponents.year = calendar.component(.year, from: event.date)
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        center.add(request)
-    
+     
     
 }
 
