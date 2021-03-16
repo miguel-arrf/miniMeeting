@@ -19,19 +19,23 @@ struct miniEventFormView: View {
     
     @State private var selectedStrength = "Mild"
     
+    @State private var showingAlert = false
+    
+    @ObservedObject var selectedColor : ColorSelected = ColorSelected()
+    
     var body: some View {
         
         NavigationView{
             Form{
                 
                 VStack {
-                    HStack {
-                        Text(eventCellViewModel.event.category)
-                            .fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
-                        Spacer()
-                    }.padding([.leading, .trailing, .top])
+                    //                    HStack {
+                    //                        Text(eventCellViewModel.event.category)
+                    //                            .fontWeight(.bold).foregroundColor(eventCellViewModel.event.backgroundColor)
+                    //                        Spacer()
+                    //                    }.padding([.leading, .trailing, .top])
                     
-                    miniCard(eventCellViewModel: eventCellViewModel)
+                    miniCard(eventCellViewModel: eventCellViewModel).padding(.vertical)
                 }
                 
                 Section(header: Text("Name 🏷")){
@@ -40,29 +44,7 @@ struct miniEventFormView: View {
                 
                 Section(header: Text("Category 📦")){
                     
-                    
-                    HStack(){
-                        Group{
-                            Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[0].toSwiftUIColor)
-                            Spacer()
-                            
-                            Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[1].toSwiftUIColor)
-                            Spacer()
-                            
-                            Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[2].toSwiftUIColor)
-                            Spacer()
-                        }
-                        Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[3].toSwiftUIColor)
-                        Spacer()
-                        
-                        Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[4].toSwiftUIColor)
-                        Spacer()
-                        
-                        Circle().frame(width: 22, height: 22).foregroundColor(fixedColors[5].toSwiftUIColor)
-                    }
-                    
-                    
-                    Toggle("Use category", isOn: $eventCellViewModel.event.hasCategory)
+                    Toggle("Set category", isOn: $eventCellViewModel.event.hasCategory)
                     
                     HStack {
                         Text("Created categories:")
@@ -99,23 +81,60 @@ struct miniEventFormView: View {
                 }
                 
                 Section(header: Text("Style 😎")) {
-                    //                    TextField("From Hour", value: $eventCellViewModel.event.fromHour, formatter: NumberFormatter())
-                    //                    TextField("To Hour", value: $eventCellViewModel.event.toHour, formatter: NumberFormatter())
+                    ColorChooser(selectedColor: selectedColor, event: eventCellViewModel)
                     
-                    //                DatePicker("From Hour", selection: $fromHour, displayedComponents: .hourAndMinute)
-                    //
-                    //                DatePicker("To Hour", selection: $toHour, displayedComponents: .hourAndMinute)
-                    ColorPicker("Background Color", selection: $eventCellViewModel.event.backgroundColor)
-                    ColorPicker("Text Color", selection: $eventCellViewModel.event.textColor)
+                    //                    ColorPicker("Background Color", selection: $eventCellViewModel.event.backgroundColor)
+                    //                    ColorPicker("Text Color", selection: $eventCellViewModel.event.textColor)
                     
-                    Button("Save changes") {
-                        
-                        self.onCommit(self.eventCellViewModel.event)
-                        presentationMode.wrappedValue.dismiss()
-                    }
+                    
                     
                 }
-            }.listStyle(GroupedListStyle()).navigationTitle("Edit")
+                
+                
+                
+                Button(action: {
+                    self.onCommit(self.eventCellViewModel.event)
+                    presentationMode.wrappedValue.dismiss()
+                    
+                }, label: {
+                    Text("Save changes").fontWeight(.bold).foregroundColor(.green).padding(4).frame(maxWidth: .infinity)
+                })
+                .listRowBackground(Color.green.opacity(0.3))
+                
+                
+                
+            }.listStyle(GroupedListStyle())
+            .navigationBarItems(
+                leading:
+                    HStack {
+                        
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }, label: {
+                            Text("Cancel").foregroundColor(.red).padding(4)
+                        }).background(RoundedRectangle(cornerRadius: 10).foregroundColor(.red).opacity(0.1))
+                        
+                    }
+                
+                , trailing:
+                    HStack{
+                        Button(action: {
+                            
+                            if eventCellViewModel.event.name.isEmpty {
+                                showingAlert.toggle()
+                            }
+                            
+                        }, label: {
+                            Text("Save").foregroundColor(.green).padding(4)
+                        }).background(RoundedRectangle(cornerRadius: 10).foregroundColor(.green).opacity(0.1))
+                    }
+            )
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Important message 😲"), message: Text("You need to define a name, otherwise cancel and add an event later ☺️"), dismissButton: .default(Text("Sure! ")))
+                
+            }
+            
+            .navigationTitle("Edit")
             
         }
     }
@@ -124,5 +143,43 @@ struct miniEventFormView: View {
 struct miniEventFormView_Previews: PreviewProvider {
     static var previews: some View {
         miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "teste", date: Date(), fromHour: Date(), toHour: Date(), backgroundColor: .blue, textColor: .black)), multipleCategories: ["C1","C2","C3"])
+    }
+}
+
+class ColorSelected : ObservableObject{
+    @Published var selectedColor : Color = fixedColors[0].toSwiftUIColor
+    
+    func changeColor(_ color: Color) {
+        selectedColor = color
+    }
+}
+
+struct ColorChooser: View {
+    
+    @ObservedObject var selectedColor : ColorSelected
+    @ObservedObject var event : EventCellViewModel
+    
+    var body: some View {
+        HStack(){
+            
+            ForEach(fixedColors, id: \.self){ uiColor in
+                
+                Circle().strokeBorder(uiColor.toSwiftUIColor, lineWidth: uiColor.toSwiftUIColor == selectedColor.selectedColor ? 3 : 0).blendMode(.plusDarker)
+                    
+                    .background(Circle().foregroundColor(uiColor.toSwiftUIColor))
+                    .frame( maxWidth: .infinity, minHeight: 22, maxHeight: 22)
+                    .onTapGesture {
+                        withAnimation{
+                            
+                            selectedColor.changeColor(uiColor.toSwiftUIColor)
+                            event.event.backgroundColor = uiColor.toSwiftUIColor
+                        }
+                    }
+                
+            }
+            
+            
+            
+        }
     }
 }

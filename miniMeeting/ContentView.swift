@@ -297,7 +297,7 @@ struct ExtractedView: View {
                 ForEach(eventListViewModel.eventCellViewModels){ event in
                     if event.event.hasCategory == false {
                         withAnimation{
-                            miniCard(eventCellViewModel: event).transition(.move(edge: .leading))
+                            miniCard(eventCellViewModel: event).padding().transition(.move(edge: .leading))
                                 .contextMenu(ContextMenu(menuItems: {
                                     
                                     Button(action: {

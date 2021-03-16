@@ -21,6 +21,7 @@
 		1E61D75525DDED570047B1C8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E61D75425DDED570047B1C8 /* Event.swift */; };
 		1E76C42B25E1976D00074FD4 /* miniColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E76C42A25E1976D00074FD4 /* miniColorPicker.swift */; };
 		1E76C42F25E1D9D500074FD4 /* miniSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E76C42E25E1D9D500074FD4 /* miniSettings.swift */; };
+		1E7AEF1525F2B8E400698353 /* miniCategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AEF1425F2B8E400698353 /* miniCategoryDetailView.swift */; };
 		1E860FCF25DEAEC1007A3A67 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E860FCE25DEAEC1007A3A67 /* EventCellViewModel.swift */; };
 		1E860FD225DEC995007A3A67 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E860FD125DEC995007A3A67 /* EventListViewModel.swift */; };
 		1E860FD925DED05E007A3A67 /* miniEventFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E860FD825DED05E007A3A67 /* miniEventFormView.swift */; };
@@ -82,6 +83,7 @@
 		1E61D75425DDED570047B1C8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1E76C42A25E1976D00074FD4 /* miniColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniColorPicker.swift; sourceTree = "<group>"; };
 		1E76C42E25E1D9D500074FD4 /* miniSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniSettings.swift; sourceTree = "<group>"; };
+		1E7AEF1425F2B8E400698353 /* miniCategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCategoryDetailView.swift; sourceTree = "<group>"; };
 		1E860FCE25DEAEC1007A3A67 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		1E860FD125DEC995007A3A67 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
 		1E860FD825DED05E007A3A67 /* miniEventFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniEventFormView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				1E13BA7525EDA5A700D2F1B1 /* miniCardTestTwo.swift */,
 				1E4AC7B725F18E3A002AB11A /* miniCategoryHeader.swift */,
 				1EBB645925F25F5200D52104 /* newContentView.swift */,
+				1E7AEF1425F2B8E400698353 /* miniCategoryDetailView.swift */,
 			);
 			path = miniMeeting;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				1E860FD925DED05E007A3A67 /* miniEventFormView.swift in Sources */,
 				1E860FD225DEC995007A3A67 /* EventListViewModel.swift in Sources */,
 				1E61D74525DDECC80047B1C8 /* miniMeetingApp.swift in Sources */,
+				1E7AEF1525F2B8E400698353 /* miniCategoryDetailView.swift in Sources */,
 				1EA1C99825EA595400C2C0F2 /* Category.swift in Sources */,
 				1E4AC7B825F18E3A002AB11A /* miniCategoryHeader.swift in Sources */,
 				1E44258C25E9C8C700102B88 /* miniEventDetailView.swift in Sources */,

@@ -13,7 +13,7 @@ class EventCellViewModel: ObservableObject, Identifiable {
     
     @Published var event: Event
         
-    var id: String = ""
+    var id = UUID().uuidString
     
     private var cancellables = Set<AnyCancellable>()
     

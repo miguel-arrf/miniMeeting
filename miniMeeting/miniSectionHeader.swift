@@ -129,7 +129,7 @@ struct miniSectionHeader: View {
             }
     
         }
-//        .overlay(RoundedRectangle(cornerRadius: 20).foregroundColor(category.2).opacity(0.05).padding().offset(y: 15).transition(.asymmetric(insertion: .scale, removal: .slide)))
+        .overlay(RoundedRectangle(cornerRadius: 20).foregroundColor(category.2).opacity(0.05).padding().offset(y: 15).transition(.asymmetric(insertion: .scale, removal: .slide)))
    
     }
 }

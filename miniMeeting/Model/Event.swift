@@ -23,7 +23,7 @@ struct Event: Codable, Identifiable{
     var toHour : Date
     
     var backgroundColor: Color
-    var textColor: Color
+    var textColor: Color = Color.black
     
     var link:URL?
     
