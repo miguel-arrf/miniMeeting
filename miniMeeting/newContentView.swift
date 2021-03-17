@@ -8,6 +8,22 @@
 import SwiftUI
 import CoreHaptics
 
+enum ActiveSheet: Identifiable {
+    case first, second, third
+    
+    var id: Int {
+        hashValue
+    }
+}
+
+class ObjectToSend : ObservableObject{
+    @Published var selectedCell : EventCellViewModel = EventCellViewModel(event: Event(name: "", category: "teste", backgroundColor: .blue, textColor: .black))
+    
+    func changeCell(_ event: EventCellViewModel) {
+        selectedCell = event
+    }
+}
+
 struct newContentView: View {
     
     func prepareHaptics() {
@@ -53,14 +69,14 @@ struct newContentView: View {
     
     @State private var engine: CHHapticEngine?
     
-    init() {
-        /*UINavigationBar.appearance().largeTitleTextAttributes =
-            [.font: UIFont(descriptor:
-                            UIFontDescriptor.preferredFontDescriptor(withTextStyle: .largeTitle)
-                            .withDesign(.serif)!, size: 30)]*/
-        
-        self.eventListViewModel = EventListViewModel()
-    }
+//    init() {
+//        /*UINavigationBar.appearance().largeTitleTextAttributes =
+//            [.font: UIFont(descriptor:
+//                            UIFontDescriptor.preferredFontDescriptor(withTextStyle: .largeTitle)
+//                            .withDesign(.serif)!, size: 30)]*/
+//
+//        self.eventListViewModel = EventListViewModel()
+//    }
     
     var body: some View {
         
@@ -72,7 +88,7 @@ struct newContentView: View {
             
             VStack(spacing: 0){
                 
-                NavigationLink(destination: miniCategoryDetailView(categoryViewModel: selectedCategory, eventListViewModel: eventListViewModel), isActive: $showDetailView) {
+                NavigationLink(destination: Text("teste categoria"), isActive: $showDetailView) {
                     EmptyView()
                 }
                 
@@ -135,15 +151,19 @@ struct newContentView: View {
                     event: Event(
                         name: selectedCell.selectedCell.event.name,
                         category: selectedCell.selectedCell.event.category,
+                        hasCategory: selectedCell.selectedCell.event.hasCategory,
                         backgroundColor: selectedCell.selectedCell.event.backgroundColor,
-                        textColor: selectedCell.selectedCell.event.textColor)
+                        textColor: selectedCell.selectedCell.event.textColor,
+                        link: selectedCell.selectedCell.event.link)
                 )
                 
                 miniEventFormView(eventCellViewModel: copy, jaExiste: true, multipleCategories: multipleCategories){event in
                     selectedCell.selectedCell.event.name = event.name
                     selectedCell.selectedCell.event.category = event.category
+                    selectedCell.selectedCell.event.hasCategory = event.hasCategory
                     selectedCell.selectedCell.event.backgroundColor = event.backgroundColor
                     selectedCell.selectedCell.event.textColor = event.textColor
+                    selectedCell.selectedCell.event.link = event.link
                 }
                 
             case .third:
@@ -187,9 +207,9 @@ struct newContentView: View {
                             Button("Disable sections", action: {})
                         }
                         
-                        Button("Order by number", action: placeOrder)
-                        Button("Order by + recent", action: adjustOrder)
-                        Button("Order by - recent", action: placeOrder)
+                        Button("Order by number", action: {})
+                        Button("Order by + recent", action: {})
+                        Button("Order by - recent", action: {})
                     } label: {
                         Image(systemName: "ellipsis.circle")
                             .font(Font.system(.body).weight(.bold)).foregroundColor(Color("WhiteAndBlack"))
@@ -222,7 +242,7 @@ struct NoCategoryCards: View {
     
     var body: some View {
         ZStack{
-            LazyVStack(spacing: 20){
+            VStack(spacing: 20){
                 
                 ForEach(eventListViewModel.eventCellViewModels){ event in
                    
@@ -230,7 +250,26 @@ struct NoCategoryCards: View {
                     if event.event.hasCategory == false {
                         withAnimation{
                             VStack{
-                            miniCard(eventCellViewModel: event)
+                                HStack{
+                                    withAnimation{
+                                        Text(event.event.name)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(event.event.textColor)
+                                    }
+                                    
+                                    
+                                    Spacer()
+
+                                    
+                                }.padding().frame(maxWidth:.infinity)
+                                .background(event.event.backgroundColor.clipShape(RoundedRectangle(cornerRadius:20)))
+                                
+                                .contentShape(RoundedRectangle(cornerRadius: 20, style: .circular))
+                                
+                                
+                                
+                                
+                                
                          
                                 .padding([.leading, .trailing])
                             }.contextMenu(ContextMenu(menuItems: {
@@ -244,6 +283,7 @@ struct NoCategoryCards: View {
                                 
             
                                 Button(action: {
+                                    print("aqui name: \(event.event.name)")
                                     selectedCell.changeCell(event)
                                     activeSheet = .second
                                 }, label: {

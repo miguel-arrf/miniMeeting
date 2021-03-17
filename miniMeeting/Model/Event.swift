@@ -21,7 +21,7 @@ struct Event: Codable, Identifiable{
     var backgroundColor: Color
     var textColor: Color = Color.black
     
-    var link:String = ""
+    var link : String = ""
     
     var userId : String?
     @ServerTimestamp var createdTime: Timestamp?

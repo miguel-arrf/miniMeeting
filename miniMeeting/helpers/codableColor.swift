@@ -66,7 +66,7 @@ extension Color: Codable {
 
             
             
-            print(" --- DECODING COLOR --- r:\(r) g:\(g) b:\(b)")
+            //print(" --- DECODING COLOR --- r:\(r) g:\(g) b:\(b)")
             
             self.init(red: r, green: g, blue: b)
         }
@@ -75,7 +75,7 @@ extension Color: Codable {
 
     public func encode(to encoder: Encoder) throws {
         
-        print("encoder: \(encoder)")
+        //print("encoder: \(encoder)")
         
         guard let colorComponents = self.colorComponents else {
             return
