@@ -28,7 +28,7 @@ struct miniCard: View {
         }.padding().frame(maxWidth:.infinity)
         .background(eventCellViewModel.event.backgroundColor.clipShape(RoundedRectangle(cornerRadius:20)))
         
-        .contentShape(RoundedRectangle(cornerRadius: 19, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: 20, style: .circular))
         
         
     }

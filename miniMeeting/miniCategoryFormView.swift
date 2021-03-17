@@ -18,22 +18,35 @@ struct miniCategoryFormView: View {
     
     @State private var showingAlert = false
     
+    @State var saveButtonColor = Color.gray
+    @State var navigationBarTitle = "New Section"
+    
     var body: some View {
         
         NavigationView{
             Form{
                 
-                VStack {
-                    miniCategoryHeader(category: categoryViewModel, withDetailView: false).padding(.vertical)
+                
+                miniCategoryHeader(category: categoryViewModel, withDetailView: false).padding(.vertical)
+                
+                
+                Section(header: Text("Title 📝").padding(.top)){
+                    TextField("Name", text: $categoryViewModel.category.name)
+                        .onChange(of: categoryViewModel.category.name){
+                            if(!$0.isEmpty){
+                                self.saveButtonColor = .green
+                                self.navigationBarTitle = $0
+                            }else{
+                                self.navigationBarTitle = "New Event"
+                                self.saveButtonColor = .gray
+                            }
+                        }
                 }
                 
                 Section(header: Text("Icon")){
                     EmojiChooser(selectedEmoji: selectedEmoji, category: categoryViewModel)
                 }
-                
-                Section(header: Text("Title 📝").padding(.top)){
-                    TextField("Name", text: $categoryViewModel.category.name)
-                }
+
                 
                 Section(header: Text("Style 😎")) {
                     ColorChooserCategory(selectedColor: selectedColor, category: categoryViewModel)
@@ -78,7 +91,11 @@ struct miniCategoryFormView: View {
                             }
                             
                         }, label: {
-                            Text("Save").foregroundColor(.green).padding(4)
+                            Text("Save")
+                                .foregroundColor(.white)
+                                .colorMultiply(self.saveButtonColor)
+                                .animation(.spring())
+                                .padding(4)
                         }).background(RoundedRectangle(cornerRadius: 10).foregroundColor(.green).opacity(0.1))
                     }
             )
@@ -86,7 +103,16 @@ struct miniCategoryFormView: View {
                 Alert(title: Text("Important message 😲"), message: Text("You need to define a name, otherwise cancel and add an event later ☺️"), dismissButton: .default(Text("Sure! ")))
                 
             }
-            .navigationTitle("New Section")
+            .navigationTitle(navigationBarTitle)
+        }
+        
+        .onAppear{
+            if !categoryViewModel.category.name.isEmpty{
+                saveButtonColor = .green
+                navigationBarTitle = categoryViewModel.category.name
+            }
+            
+            
         }
         
     }
@@ -94,12 +120,11 @@ struct miniCategoryFormView: View {
 
 struct miniCategoryFormView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
-            miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "Escola", backgroundColor: fixedColors[0], textColor: .black, emoji: fixedEmojis[0])))
+        
+        miniCategoryFormView(categoryViewModel: CategoryViewModel(category: Category( name: "Escola", backgroundColor: fixedColors[0], textColor: .black, emoji: fixedEmojis[0]))).preferredColorScheme(.light)
             
             //            EmojiChooser(selectedEmoji: EmojiSelected(), category: CategoryViewModel(category: Category(name: "teste", backgroundColor: .orange, textColor: .black, emoji: fixedEmojis[0])))
-        }
-        
+
     }
 }
 

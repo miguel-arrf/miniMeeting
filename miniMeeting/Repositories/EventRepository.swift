@@ -25,6 +25,8 @@ class EventRepository: ObservableObject {
     
     func loadData() {
         let userId = Auth.auth().currentUser?.uid
+
+        print("userID: \(userId!)")
         
         db.collection("events")
             .whereField("userId", isEqualTo: userId!)

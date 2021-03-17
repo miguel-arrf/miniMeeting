@@ -16,7 +16,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     UIApplication.shared.applicationIconBadgeNumber = 0
     UserDefaults.standard.set(0, forKey: "NotificationBadgeCount")
-
+    
     return true
   }
     
@@ -34,6 +34,7 @@ struct miniMeetingApp: App {
     @Environment(\.scenePhase) var scenePhase
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
       
+
       init() {
         FirebaseApp.configure()
         Auth.auth().signInAnonymously()

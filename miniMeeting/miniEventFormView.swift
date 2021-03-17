@@ -23,7 +23,11 @@ struct miniEventFormView: View {
     
     @ObservedObject var selectedColor : ColorSelected = ColorSelected()
     
+    @State var saveButtonColor = Color.gray
+    @State var navigationBarTitle = "New Event"
+    
     var body: some View {
+   
         
         NavigationView{
             Form{
@@ -34,6 +38,15 @@ struct miniEventFormView: View {
                 
                 Section(header: Text("Name 🏷")){
                     TextField("Name", text: $eventCellViewModel.event.name)
+                        .onChange(of: eventCellViewModel.event.name){
+                            if(!$0.isEmpty){
+                                self.saveButtonColor = .green
+                                self.navigationBarTitle = $0
+                            }else{
+                                self.navigationBarTitle = "New Event"
+                                self.saveButtonColor = .gray
+                            }
+                        }
                 }
                 
                 Section(header: Text("Category 📦")){
@@ -103,7 +116,6 @@ struct miniEventFormView: View {
                 , trailing:
                     HStack{
                         Button(action: {
-                            
                             if eventCellViewModel.event.name.isEmpty {
                                 showingAlert.toggle()
                             }else{
@@ -112,8 +124,13 @@ struct miniEventFormView: View {
                             }
                             
                         }, label: {
-                            Text("Save").foregroundColor(.green).padding(4)
+                            Text("Save")
+                                .foregroundColor(.white)
+                                .colorMultiply(self.saveButtonColor)
+                                .animation(.spring())
+                                .padding(4)
                         }).background(RoundedRectangle(cornerRadius: 10).foregroundColor(.green).opacity(0.1))
+                    
                     }
             )
             .alert(isPresented: $showingAlert) {
@@ -121,7 +138,7 @@ struct miniEventFormView: View {
                 
             }
             
-            .navigationTitle("New Event")
+            .navigationTitle(navigationBarTitle)
             
         }
     }

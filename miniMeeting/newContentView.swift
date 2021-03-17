@@ -6,8 +6,41 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 struct newContentView: View {
+    
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+
+        do {
+            self.engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("There was an error creating the engine: \(error.localizedDescription)")
+        }
+    }
+    
+    func complexSuccess() {
+        // make sure that the device supports haptics
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        var events = [CHHapticEvent]()
+
+        // create one intense, sharp tap
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
+        events.append(event)
+
+        // convert those events into a pattern and play it immediately
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play pattern: \(error.localizedDescription).")
+        }
+    }
     
     @ObservedObject var eventListViewModel = EventListViewModel()
     
@@ -17,6 +50,8 @@ struct newContentView: View {
     @State var activeSheet: ActiveSheet?
     
     @ObservedObject var selectedCell = ObjectToSend()
+    
+    @State private var engine: CHHapticEngine?
     
     init() {
         /*UINavigationBar.appearance().largeTitleTextAttributes =
@@ -87,6 +122,9 @@ struct newContentView: View {
             
             switch item {
             case .first:
+                
+               
+                
                 miniEventFormView(eventCellViewModel: EventCellViewModel(event: Event(name: "", category: "", hasCategory : false, backgroundColor: fixedColors[0], textColor: .black)), multipleCategories: multipleCategories) { event in
                     
                     self.eventListViewModel.addEvent(event: event)
@@ -126,9 +164,12 @@ struct newContentView: View {
                     
                     Menu {
                         Button("Add Event", action: {
+                            complexSuccess()
                             activeSheet = .first
                         })
+                        
                         Button("Add Section", action: {
+                            complexSuccess()
                             activeSheet = .third
                         })
                     } label: {
@@ -160,7 +201,7 @@ struct newContentView: View {
                 })
         
         .navigationTitle("17 Fevereiro 2021")
-        
+        .onAppear(perform: prepareHaptics)
     }
 }
 
@@ -171,6 +212,7 @@ struct newContentView_Previews: PreviewProvider {
         }
     }
 }
+
 
 struct NoCategoryCards: View {
     
